@@ -10,35 +10,46 @@ use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::{log, near_bindgen};
 
 // Define the default message
-const DEFAULT_MESSAGE: &str = "Hello";
+//const DEFAULT_MESSAGE: &str = "Hello";
 
 // Define the contract structure
 #[near_bindgen]
-#[derive(BorshDeserialize, BorshSerialize)]
+#[derive(Default, BorshDeserialize, BorshSerialize)]
 pub struct Contract {
-    message: String,
+    song_for_sale: String,
 }
 
 // Define the default, which automatically initializes the contract
+/*
 impl Default for Contract{
     fn default() -> Self{
         Self{message: DEFAULT_MESSAGE.to_string()}
     }
 }
+*/
 
 // Implement the contract structure
 #[near_bindgen]
 impl Contract {
     // Public method - returns the greeting saved, defaulting to DEFAULT_MESSAGE
     pub fn get_greeting(&self) -> String {
-        return self.message.clone();
+       // return self.message.clone();
+       "hey yo".to_string()
     }
 
     // Public method - accepts a greeting, such as "howdy", and records it
     pub fn set_greeting(&mut self, message: String) {
         // Use env::log to record logs permanently to the blockchain!
         log!("Saving greeting {}", message);
-        self.message = message;
+        //self.message = message;
+    }
+
+    pub fn add_song(&mut self, song: String) {
+        self.song_for_sale = song;
+    }
+
+    pub fn get_song(&self) -> String {
+        return self.song_for_sale.clone()
     }
 }
 
@@ -49,8 +60,9 @@ impl Contract {
 #[cfg(test)]
 mod tests {
     use super::*;
-
+/*
     #[test]
+    #[ignore]
     fn get_default_greeting() {
         let contract = Contract::default();
         // this test did not call set_greeting so should return the default "Hello" greeting
@@ -61,6 +73,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore = "not yet implemented"]
     fn set_then_get_greeting() {
         let mut contract = Contract::default();
         contract.set_greeting("howdy".to_string());
@@ -69,4 +82,5 @@ mod tests {
             "howdy".to_string()
         );
     }
+    */
 }

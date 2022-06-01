@@ -3,8 +3,9 @@ import React from 'react'
 
 import './assets/css/global.css'
 
-import {login, logout, get_greeting, set_greeting} from './assets/js/near/utils'
+import {login, logout, get_greeting, set_greeting, add_song} from './assets/js/near/utils'
 import getConfig from './assets/js/near/config'
+import { setSourceMapRange } from 'typescript'
 
 
 export default function App() {
@@ -91,10 +92,13 @@ export default function App() {
           event.preventDefault()
 
           // get elements from the form using their id attribute
-          const { fieldset, greeting } = event.target.elements
+          //const { fieldset, greeting } = event.target.elements
+          const { fieldset, song } = event.target.elements
+
 
           // hold onto new user-entered value from React's SynthenticEvent for use after `await` call
-          const newGreeting = greeting.value
+          //const newGreeting = greeting.value
+          const newSong = song.value
 
           // disable the form while the value gets updated on-chain
           fieldset.disabled = true
@@ -102,7 +106,8 @@ export default function App() {
           try {
             // make an update call to the smart contract
             // pass the value that the user entered in the greeting field
-            await set_greeting(newGreeting)
+            //await set_greeting(newGreeting)
+            await add_song(newSong)
           } catch (e) {
             alert(
               'Something went wrong! ' +
@@ -116,7 +121,8 @@ export default function App() {
           }
 
           // update local `greeting` variable to match persisted value
-          setGreeting(newGreeting)
+          //setGreeting(newGreeting)
+          setSong(newSong)
 
           // show Notification
           setShowNotification(true)
@@ -136,13 +142,13 @@ export default function App() {
                 marginBottom: '0.5em'
               }}
             >
-              Change greeting
+              Enter song for sale
             </label>
             <div style={{ display: 'flex' }}>
               <input
                 autoComplete="off"
                 defaultValue={greeting}
-                id="greeting"
+                id="song"
                 onChange={e => setButtonDisabled(e.target.value === greeting)}
                 style={{ flex: 1 }}
               />
@@ -150,22 +156,18 @@ export default function App() {
                 disabled={buttonDisabled}
                 style={{ borderRadius: '0 5px 5px 0' }}
               >
-                Save
+                Submit
               </button>
             </div>
           </fieldset>
         </form>
         <p>
-          Look at that! A Hello World app! This greeting is stored on the NEAR blockchain. Check it out:
+          Welcome Musician! Enter your song for sale:
         </p>
         <ol>
           <li>
             Look in <code>src/App.js</code> and <code>src/utils.js</code> – you'll see <code>get_greeting</code> and <code>set_greeting</code> being called on <code>contract</code>. What's this?
           </li>
-          <li>
-            Ultimately, this <code>contract</code> code is defined in <code>assembly/main.ts</code> – this is the source code for your <a target="_blank" rel="noreferrer" href="https://docs.near.org/docs/develop/contracts/overview">smart contract</a>.</li>
-          <li>
-            When you run <code>yarn dev</code>, the code in <code>assembly/main.ts</code> gets deployed to the NEAR testnet. You can see how this happens by looking in <code>package.json</code> at the <code>scripts</code> section to find the <code>dev</code> command.</li>
         </ol>
         <hr />
         <p>
