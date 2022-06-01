@@ -5,7 +5,7 @@ import './assets/css/global.css'
 
 import {login, logout, get_greeting, set_greeting, add_song} from './assets/js/near/utils'
 import getConfig from './assets/js/near/config'
-import { setSourceMapRange } from 'typescript'
+
 
 
 export default function App() {
@@ -88,6 +88,9 @@ export default function App() {
           {' '/* React trims whitespace around tags; insert literal space character when needed */}
           {window.accountId}!
         </h1>
+        <div>
+          song name: 
+        </div>
         <form onSubmit={async event => {
           event.preventDefault()
 
