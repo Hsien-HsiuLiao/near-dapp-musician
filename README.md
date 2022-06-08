@@ -3,6 +3,10 @@ NEAR dapp for Musicians
 
 This [React] app was initialized with [create-near-app]
 
+   | `npx create-near-app --contract=rust --frontend=react my-project`
+
+(ref: https://www.near-sdk.io/, https://www.near-sdk.io/zero-to-hero/basics/overview)
+
 
 Quick Start
 ===========
