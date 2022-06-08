@@ -5,7 +5,8 @@ import './assets/css/global.css'
 
 import {login, logout, get_greeting, set_greeting, add_song} from './assets/js/near/utils'
 import getConfig from './assets/js/near/config'
-
+import Header from './assets/js/Header.js';
+import SongList from './assets/js/SongList.js';
 
 
 export default function App() {
@@ -75,20 +76,11 @@ export default function App() {
       <button className="link" style={{ float: 'right' }} onClick={logout}>
         Sign out
       </button>
+      
       <main>
-        <h1>
-          <label
-            htmlFor="greeting"
-            style={{
-              color: 'var(--secondary)',
-              borderBottom: '2px solid var(--secondary)'
-            }}
-          >
-            {greeting}
-          </label>
-          {' '/* React trims whitespace around tags; insert literal space character when needed */}
-          {window.accountId}!
-        </h1>
+      <Header greeting={greeting} />
+      <SongList />
+        
         <div>
           song name: {song}
         </div>
