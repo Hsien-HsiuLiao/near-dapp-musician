@@ -1,4 +1,4 @@
-near-blank-project
+NEAR dapp for Musicians
 ==================
 
 This [React] app was initialized with [create-near-app]

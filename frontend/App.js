@@ -90,7 +90,7 @@ export default function App() {
           {window.accountId}!
         </h1>
         <div>
-          song name: 
+          song name: {song}
         </div>
         <form onSubmit={async event => {
           event.preventDefault()
@@ -194,7 +194,7 @@ function Notification() {
         {window.accountId}
       </a>
       {' '/* React trims whitespace around tags; insert literal space character when needed */}
-      called method: 'set_greeting' in contract:
+      called method: ?????'set_greeting' in contract:
       {' '}
       <a target="_blank" rel="noreferrer" href={`${urlPrefix}/${window.contract.contractId}`}>
         {window.contract.contractId}
