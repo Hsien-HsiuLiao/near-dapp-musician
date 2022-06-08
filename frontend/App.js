@@ -11,6 +11,8 @@ import getConfig from './assets/js/near/config'
 export default function App() {
   // use React Hooks to store greeting in component state
   const [greeting, setGreeting] = React.useState()
+  //use React Hooks to store song in component state
+  const [song, setSong] = React.useState()
 
   // when the user has not yet interacted with the form, disable the button
   const [buttonDisabled, setButtonDisabled] = React.useState(true)
@@ -52,8 +54,7 @@ export default function App() {
           Welcome to NEAR!
         </h1>
         <p>
-        Your contract is storing a greeting message in the NEAR blockchain. To
-        change it you need to sign in using the NEAR Wallet. It is very simple,
+         sign in using the NEAR Wallet. It is very simple,
         just use the button below.
         </p>
         <p>
