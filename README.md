@@ -7,6 +7,10 @@ This [React] app was initialized with [create-near-app]
 
 (ref: https://www.near-sdk.io/, https://www.near-sdk.io/zero-to-hero/basics/overview)
 
+Troubleshooting (not initialized, etc)
+
+remove neardev folder (see https://www.near-sdk.io/upgrading/prototyping)
+
 
 Quick Start
 ===========
