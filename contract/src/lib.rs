@@ -16,7 +16,7 @@ use near_sdk::collections::*;
 
 // Define the contract structure
 #[near_bindgen]
-#[derive( BorshDeserialize, BorshSerialize, Default)]
+#[derive( BorshDeserialize, BorshSerialize)]
 pub struct Contract {
 //    songs_by_artist: UnorderedMap<AccountId, SongList>,
     song_for_sale: String,
@@ -33,19 +33,19 @@ pub struct SongInfo {
     song_name: String,
     price: u8
 }
-
+*/
 // Define the default, which automatically initializes the contract
 
 impl Default for Contract{
     fn default() -> Self{
         //Self{message: DEFAULT_MESSAGE.to_string()}
         Self{
-            songs_by_artist: UnorderedMap::new(b"s"),
+         //   songs_by_artist: UnorderedMap::new(b"s"),
             song_for_sale: "none".to_string(),
         }
     }
 }
-*/
+
 
 
 // Implement the contract structure
