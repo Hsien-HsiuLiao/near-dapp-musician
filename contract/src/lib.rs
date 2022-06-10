@@ -7,16 +7,27 @@
  */
 
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
-use near_sdk::{log, near_bindgen};
+use near_sdk::{log, near_bindgen, env, AccountId};
+use near_sdk::collections::*;
 
 // Define the default message
 //const DEFAULT_MESSAGE: &str = "Hello";
 
 // Define the contract structure
 #[near_bindgen]
-#[derive(Default, BorshDeserialize, BorshSerialize)]
+#[derive( BorshDeserialize, BorshSerialize)]
 pub struct Contract {
+    songs_by_artist: UnorderedMap<AccountId, SongList>,
     song_for_sale: String,
+}
+
+pub struct SongList {
+    songs: Vec<SongInfo>,
+}
+
+pub struct SongInfo {
+    song_name: String,
+    price: u8
 }
 
 // Define the default, which automatically initializes the contract
