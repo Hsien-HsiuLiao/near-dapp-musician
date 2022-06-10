@@ -158,13 +158,9 @@ export default function App() {
           </fieldset>
         </form>
         <p>
-          Welcome Musician! Enter your song for sale:
+          Welcome Musician!
         </p>
-        <ol>
-          <li>
-            Look in <code>src/App.js</code> and <code>src/utils.js</code> – you'll see <code>get_greeting</code> and <code>set_greeting</code> being called on <code>contract</code>. What's this?
-          </li>
-        </ol>
+        
         <hr />
         <p>
           To keep learning, check out <a target="_blank" rel="noreferrer" href="https://docs.near.org">the NEAR docs</a> or look through some <a target="_blank" rel="noreferrer" href="https://examples.near.org">example apps</a>.
