@@ -5,7 +5,7 @@
  * https://near-docs.io/develop/Contract
  *
  */
-
+use std::collections::HashMap;
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::{log, near_bindgen, env, AccountId, PanicOnDefault,
                 serde::{Deserialize, Serialize}};
@@ -16,10 +16,11 @@ use near_sdk::collections::*;
 
 // Define the contract structure
 #[near_bindgen]
-#[derive( BorshDeserialize, BorshSerialize)]
+#[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
 pub struct Contract {
-//    songs_by_artist: UnorderedMap<AccountId, SongList>,
-    song_for_sale: String,
+    //songs_by_artist: UnorderedMap<AccountId, SongList>,
+   pub songs_by_artist: LookupMap<AccountId, String>,
+//    pub song_for_sale: String,
 }
 /* 
 #[derive(BorshDeserialize, BorshSerialize, Debug)]
@@ -27,13 +28,14 @@ pub struct SongList {
     songs: Vec<SongInfo>,
 }
 
+
 #[derive(BorshDeserialize, BorshSerialize, Deserialize, Serialize, Debug)]
 #[serde(crate = "near_sdk::serde")]
 pub struct SongInfo {
     song_name: String,
     price: u8
 }
-*/
+
 // Define the default, which automatically initializes the contract
 
 impl Default for Contract{
@@ -46,20 +48,20 @@ impl Default for Contract{
     }
 }
 
-
+*/
 
 // Implement the contract structure
 #[near_bindgen]
 impl Contract {
-    /* 
     #[init]
     pub fn new() -> Self {
         Self {
-            songs_by_artist: UnorderedMap::new(b"s"),
-            song_for_sale: "none".to_string(),
+          //  songs_by_artist: UnorderedMap::new(b"s"),
+          songs_by_artist: LookupMap::new(b"s".to_vec()),
+      //      song_for_sale: "none".to_string(),
         }
     }
-    */
+    
     // Public method - returns the greeting saved, defaulting to DEFAULT_MESSAGE
     pub fn get_greeting(&self) -> String {
        // return self.message.clone();
@@ -74,12 +76,29 @@ impl Contract {
     }
 
     pub fn add_song(&mut self, song: String) {
-        self.song_for_sale = song;
+        //self.song_for_sale = song;
+        self.songs_by_artist.insert(&env::predecessor_account_id(), &song);
     }
 
     pub fn get_song(&self) -> String {
-        return self.song_for_sale.clone()
+       // return self.song_for_sale.clone()
+      // self.songs_by_artist.get(&account_id)
+      unimplemented!()
     }
+/* 
+    pub fn set_status(&mut self, status: String) {
+        self.songs_by_artist.insert(&env::predecessor_account_id(), &status);
+        // Note, don't need to check size, since `UnorderedMap` doesn't store all data in memory.
+    }
+
+    pub fn delete_status(&mut self) {
+        self.songs_by_artist.remove(&env::predecessor_account_id());
+    }
+
+    pub fn get_status(&self, account_id: AccountId) -> Option<String> {
+        self.songs_by_artist.get(&account_id)
+    }
+    */
 }
 
 /*
