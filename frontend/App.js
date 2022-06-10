@@ -58,13 +58,10 @@ export default function App() {
           Welcome to NEAR!
         </h1>
         <p>
-         sign in using the NEAR Wallet. It is very simple,
-        just use the button below.
+         Please sign in using the NEAR Wallet. Click the button below.
         </p>
         <p>
-        Do not worry, this app runs in the test network ("testnet"). It works
-        just like the main network ("mainnet"), but using NEAR Tokens that are
-        only for testing!
+        This app runs in the test network ("testnet").
         </p>
         <p style={{ textAlign: 'center', marginTop: '2.5em' }}>
           <button onClick={login}>Sign in</button>
