@@ -1,11 +1,9 @@
 /*
- * Example smart contract written in RUST
- *
  * Learn more about writing NEAR smart contracts with Rust:
  * https://near-docs.io/develop/Contract
  *
  */
-use std::collections::HashMap;
+//use std::collections::HashMap;
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::{log, near_bindgen, env, AccountId, PanicOnDefault,
                 serde::{Deserialize, Serialize}};
@@ -16,10 +14,10 @@ use near_sdk::collections::*;
 
 // Define the contract structure
 #[near_bindgen]
-#[derive(BorshDeserialize, BorshSerialize, PanicOnDefault)]
+#[derive(BorshDeserialize, BorshSerialize)]
 pub struct Contract {
     //songs_by_artist: UnorderedMap<AccountId, SongList>,
-   pub songs_by_artist: LookupMap<AccountId, String>,
+    songs_by_artist: UnorderedMap<AccountId, String>,
 //    pub song_for_sale: String,
 }
 /* 
@@ -36,31 +34,35 @@ pub struct SongInfo {
     price: u8
 }
 
+*/
+
 // Define the default, which automatically initializes the contract
 
 impl Default for Contract{
     fn default() -> Self{
         //Self{message: DEFAULT_MESSAGE.to_string()}
+        log!("default!");
         Self{
-         //   songs_by_artist: UnorderedMap::new(b"s"),
-            song_for_sale: "none".to_string(),
+            songs_by_artist: UnorderedMap::new(b"s".to_vec()),
+         //   song_for_sale: "none".to_string(),
         }
     }
 }
 
-*/
-
 // Implement the contract structure
 #[near_bindgen]
 impl Contract {
+    /* 
     #[init]
     pub fn new() -> Self {
+        log!("#[init]");
         Self {
           //  songs_by_artist: UnorderedMap::new(b"s"),
           songs_by_artist: LookupMap::new(b"s".to_vec()),
       //      song_for_sale: "none".to_string(),
         }
     }
+    */
     
     // Public method - returns the greeting saved, defaulting to DEFAULT_MESSAGE
     pub fn get_greeting(&self) -> String {
@@ -76,6 +78,7 @@ impl Contract {
     }
 
     pub fn add_song(&mut self, song: String) {
+        log!("add_song called!");
         //self.song_for_sale = song;
         self.songs_by_artist.insert(&env::predecessor_account_id(), &song);
     }
