@@ -14,16 +14,17 @@ use near_sdk::collections::*;
 
 // Define the contract structure
 #[near_bindgen]
-#[derive(BorshDeserialize, BorshSerialize)]
+#[derive(BorshDeserialize, BorshSerialize, Debug)]
 pub struct Contract {
-    //songs_by_artist: UnorderedMap<AccountId, SongList>,
-    songs_by_artist: UnorderedMap<AccountId, String>,
+    songs_by_artist: UnorderedMap<AccountId, SongList>,
+    //songs_by_artist: UnorderedMap<AccountId, String>,
 //    pub song_for_sale: String,
 }
-/* 
+ 
 #[derive(BorshDeserialize, BorshSerialize, Debug)]
 pub struct SongList {
     songs: Vec<SongInfo>,
+//songs: Vec<String>,
 }
 
 
@@ -34,7 +35,7 @@ pub struct SongInfo {
     price: u8
 }
 
-*/
+
 
 // Define the default, which automatically initializes the contract
 
@@ -80,7 +81,15 @@ impl Contract {
     pub fn add_song(&mut self, song: String) {
         log!("add_song called!");
         //self.song_for_sale = song;
-        self.songs_by_artist.insert(&env::predecessor_account_id(), &song);
+       // self.songs_by_artist.insert(&env::predecessor_account_id(), &song);
+       //if SongList{songs>0}, init song_info
+       let mut song_info: Vec<SongInfo> = Vec::new();
+       song_info.push(SongInfo{song_name: song, price: 1});
+       self.songs_by_artist.insert(&env::predecessor_account_id(), 
+       &SongList{songs: song_info});
+       let get_songinfo = self.songs_by_artist.get(&env::predecessor_account_id()).unwrap();
+       let get_song = get_songinfo.songs;
+       log!("get_song: {:?}", get_song[0].song_name);
     }
 
     pub fn get_song(&self) -> String {
