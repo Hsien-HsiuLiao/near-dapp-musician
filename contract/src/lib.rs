@@ -79,17 +79,21 @@ impl Contract {
     }
 
     pub fn add_song(&mut self, song: String) {
-        log!("add_song called!");
-        //self.song_for_sale = song;
        // self.songs_by_artist.insert(&env::predecessor_account_id(), &song);
        //if SongList{songs>0}, init song_info
-       let mut song_info: Vec<SongInfo> = Vec::new();
-       song_info.push(SongInfo{song_name: song, price: 1});
-       self.songs_by_artist.insert(&env::predecessor_account_id(), 
-       &SongList{songs: song_info});
+       //let mut song_info: Vec<SongInfo> = Vec::new();
+       //song_info.push(SongInfo{song_name: song, price: 1});
        let get_songinfo = self.songs_by_artist.get(&env::predecessor_account_id()).unwrap();
-       let get_song = get_songinfo.songs;
-       log!("get_song: {:?}", get_song[0].song_name);
+       log!("songinfo: {:?}", &get_songinfo);
+       let mut get_song_list = get_songinfo.songs;
+       let mut song_list = get_song_list;
+       song_list.push(SongInfo{song_name: song, price: 1});
+       self.songs_by_artist.insert(&env::predecessor_account_id(), 
+       &SongList{songs: song_list});
+       log!("songlist: {:?}", self.songs_by_artist.get(&env::predecessor_account_id()).unwrap().songs);
+      // get_song_list.push(SongInfo{song_name: "tst".to_string(), price: 2});
+      // log!("get_song: {:?}", get_song_list[0].song_name);
+       log!("predecessor: {:?}", &env::predecessor_account_id());
     }
 
     pub fn get_song(&self) -> String {
