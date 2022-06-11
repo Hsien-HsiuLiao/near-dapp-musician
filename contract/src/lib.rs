@@ -27,6 +27,14 @@ pub struct SongList {
 //songs: Vec<String>,
 }
 
+impl Default for SongList {
+    fn default() -> Self{
+        SongList{
+            songs: Vec::new(),
+        }
+    }
+}
+
 
 #[derive(BorshDeserialize, BorshSerialize, Deserialize, Serialize, Debug)]
 #[serde(crate = "near_sdk::serde")]
@@ -83,7 +91,7 @@ impl Contract {
        //if SongList{songs>0}, init song_info
        //let mut song_info: Vec<SongInfo> = Vec::new();
        //song_info.push(SongInfo{song_name: song, price: 1});
-       let get_songinfo = self.songs_by_artist.get(&env::predecessor_account_id()).unwrap();
+       let get_songinfo = self.songs_by_artist.get(&env::predecessor_account_id()).unwrap_or_default();
        log!("songinfo: {:?}", &get_songinfo);
        let mut get_song_list = get_songinfo.songs;
        let mut song_list = get_song_list;
@@ -93,7 +101,7 @@ impl Contract {
        log!("songlist: {:?}", self.songs_by_artist.get(&env::predecessor_account_id()).unwrap().songs);
       // get_song_list.push(SongInfo{song_name: "tst".to_string(), price: 2});
       // log!("get_song: {:?}", get_song_list[0].song_name);
-       log!("predecessor: {:?}", &env::predecessor_account_id());
+      // log!("predecessor: {:?}", &env::predecessor_account_id());
     }
 
     pub fn get_song(&self) -> String {
