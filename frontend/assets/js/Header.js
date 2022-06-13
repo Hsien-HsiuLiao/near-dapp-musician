@@ -16,6 +16,9 @@ function Header({greeting}) {
           {' '/* React trims whitespace around tags; insert literal space character when needed */}
           {window.accountId}!
         </h1>
+        <p>
+          Welcome Musician!
+        </p>
         </header>
     );
 }
