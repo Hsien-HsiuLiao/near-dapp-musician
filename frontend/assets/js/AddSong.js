@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 //import { add_song } from './near/utils';
 import getConfig from './near/config';
 
-function AddSong ({add_song}) {
+function AddSong ({add_song_info}) {
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [song, setSong] = useState();
     const [songInfo, setSongInfo] = useState(undefined);
@@ -18,7 +18,7 @@ function AddSong ({add_song}) {
             // hold onto new user-entered value from React's SynthenticEvent for use after `await` call
             //const newGreeting = greeting.value
             const newSong = songname.value
-            const parsedPrice = parseInt(songInfo.price)
+            const parsedPrice = parseFloat(songInfo.price)
   
             // disable the form while the value gets updated on-chain
             fieldset.disabled = true
@@ -27,7 +27,7 @@ function AddSong ({add_song}) {
               // make an update call to the smart contract
               // pass the value that the user entered in the greeting field
               //await set_greeting(newGreeting)
-              await add_song(songInfo.songname, parsedPrice)
+              await add_song_info(songInfo.songname, parsedPrice)
             } catch (e) {
               alert(
                 'Something went wrong! ' +
@@ -92,7 +92,7 @@ function AddSong ({add_song}) {
                 <input
                   autoComplete="off"
                   id="price"
-                  type="number"
+                  type="text"
                   onChange={e => updateSongInfo(e, 'price')}
                 />
                 <button

@@ -1,9 +1,9 @@
-import 'regenerator-runtime/runtime'
-import React from 'react'
+//import 'regenerator-runtime/runtime'
+import React, {useState} from 'react'
 
 import './assets/css/global.css'
 
-import {login, logout, get_greeting, set_greeting, add_song} from './assets/js/near/utils'
+import {login, logout, get_greeting, set_greeting, add_song_info, get_song_catalog} from './assets/js/near/utils'
 import getConfig from './assets/js/near/config'
 import Header from './assets/js/Header.js';
 import SongList from './assets/js/SongList.js';
@@ -12,9 +12,11 @@ import AddSong from './assets/js/AddSong';
 
 export default function App() {
   // use React Hooks to store greeting in component state
-  const [greeting, setGreeting] = React.useState()
+  //const [greeting, setGreeting] = React.useState()
   //use React Hooks to store song in component state
 //  const [song, setSong] = React.useState()
+ // const[songList, setSongList] = useState(["test setSonglist usestate"]);
+  const[songCatalog, setSongCatalog] = useState("test songcaotalog");
 
   // when the user has not yet interacted with the form, disable the button
   //const [buttonDisabled, setButtonDisabled] = React.useState(true)
@@ -26,6 +28,8 @@ export default function App() {
   // Learn more: https://reactjs.org/docs/hooks-intro.html
   React.useEffect(
     () => {
+      const[songList, setSongList] = useState(["test setSonglist usestate"]);
+
       // get_greeting is in near/utils.js
   /*
       get_greeting()
@@ -54,7 +58,7 @@ export default function App() {
               borderBottom: '2px solid var(--secondary)'
             }}
           >
-            {greeting}
+            greeting
           </label>!
           Welcome to NEAR!
         </h1>
@@ -79,15 +83,16 @@ export default function App() {
       </button>
       
       <main>
-      <Header greeting={greeting} />
-      <SongList />
+      <Header />
+      
+      <SongList songList={songList}/>
         
         <div>
       {/* 
           song name: {song}
       */}
         </div>
-      <AddSong add_song={add_song}/>
+      <AddSong add_song_info={add_song_info}/>
       
         
         

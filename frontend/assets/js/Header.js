@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Header({greeting}) {
+function Header() {
     return (
         <header style={headerstyle}>
            <h1>
@@ -11,7 +11,7 @@ function Header({greeting}) {
               borderBottom: '2px solid var(--secondary)'
             }}
           >
-            {greeting}
+            hey yo
           </label>
           {' '/* React trims whitespace around tags; insert literal space character when needed */}
           {window.accountId}!

@@ -18,9 +18,9 @@ export async function initContract() {
   // Initializing our contract APIs by contract name and configuration
   window.contract = await new Contract(window.walletConnection.account(), nearConfig.contractName, {
     // View methods are read only. They don't modify the state, but usually return some value.
-    viewMethods: ['get_greeting', 'get_song'],
+    viewMethods: ['get_greeting', 'get_song_catalog'],
     // Change methods can modify the state. But you don't receive the returned value when called.
-    changeMethods: ['set_greeting', 'add_song'],
+    changeMethods: ['set_greeting', 'add_song_info'],
   })
 }
 
@@ -45,8 +45,8 @@ export async function set_greeting(message){
   return response
 }
 
-export async function add_song(songname, price) {
-  let response = await window.contract.add_song({
+export async function add_song_info(songname, price) {
+  let response = await window.contract.add_song_info({
     args:{song_name: songname, price}
   })
   return response
@@ -55,4 +55,9 @@ export async function add_song(songname, price) {
 export async function get_greeting(){
   let greeting = await window.contract.get_greeting()
   return greeting
+}
+
+export async function get_song_catalog(){
+  let song_catalog = await window.contract.get_song_catalog();
+  return song_catalog
 }
