@@ -45,9 +45,9 @@ export async function set_greeting(message){
   return response
 }
 
-export async function add_song(song) {
+export async function add_song(songname, price) {
   let response = await window.contract.add_song({
-    args:{song: song}
+    args:{song_name: songname, price}
   })
   return response
 }
