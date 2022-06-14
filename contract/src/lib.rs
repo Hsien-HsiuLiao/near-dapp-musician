@@ -86,7 +86,7 @@ impl Contract {
         //self.message = message;
     }
 
-    pub fn add_song(&mut self, song: String) {
+    pub fn add_song(&mut self, song_name: String, price: u8) {
        // self.songs_by_artist.insert(&env::predecessor_account_id(), &song);
        //if SongList{songs>0}, init song_info
        //let mut song_info: Vec<SongInfo> = Vec::new();
@@ -95,7 +95,7 @@ impl Contract {
        log!("songinfo: {:?}", &get_songinfo);
        let mut get_song_list = get_songinfo.songs;
        let mut song_list = get_song_list;
-       song_list.push(SongInfo{song_name: song, price: 1});
+       song_list.push(SongInfo{song_name: song_name, price});
        self.songs_by_artist.insert(&env::predecessor_account_id(), 
        &SongList{songs: song_list});
        log!("songlist: {:?}", self.songs_by_artist.get(&env::predecessor_account_id()).unwrap().songs);
