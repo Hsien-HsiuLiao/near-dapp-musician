@@ -87,7 +87,7 @@ export default function App() {
           song name: {song}
       */}
         </div>
-      <AddSong />
+      <AddSong add_song={add_song}/>
       
         
         

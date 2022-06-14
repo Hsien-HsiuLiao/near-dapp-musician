@@ -1,27 +1,24 @@
-import React from 'react';
-import { add_song } from './near/utils';
+import React, {useState} from 'react';
+//import { add_song } from './near/utils';
 import getConfig from './near/config';
 
-function AddSong () {
-    const [buttonDisabled, setButtonDisabled] = React.useState(true);
-    const [song, setSong] = React.useState();
-    const [showNotification, setShowNotification] = React.useState(false);
+function AddSong ({add_song}) {
+    const [buttonDisabled, setButtonDisabled] = useState(true);
+    const [song, setSong] = useState();
+    const [songInfo, setSongInfo] = useState(undefined);
+    const [showNotification, setShowNotification] = useState(false);
 
-
-
-    return (
-        <>
-        <form onSubmit={async event => {
-            event.preventDefault()
+    const submit = async event => {
+      event.preventDefault()
   
             // get elements from the form using their id attribute
             //const { fieldset, greeting } = event.target.elements
             const { fieldset, song } = event.target.elements
   
-  
             // hold onto new user-entered value from React's SynthenticEvent for use after `await` call
             //const newGreeting = greeting.value
-            const newSong = song.value
+            const newSong = songname.value
+            const parsedPrice = parseInt(songInfo.price)
   
             // disable the form while the value gets updated on-chain
             fieldset.disabled = true
@@ -30,7 +27,7 @@ function AddSong () {
               // make an update call to the smart contract
               // pass the value that the user entered in the greeting field
               //await set_greeting(newGreeting)
-              await add_song(newSong)
+              await add_song(songInfo.songname, parsedPrice)
             } catch (e) {
               alert(
                 'Something went wrong! ' +
@@ -55,25 +52,48 @@ function AddSong () {
             setTimeout(() => {
               setShowNotification(false)
             }, 11000)
-          }}>
+    }
+
+    const updateSongInfo = (e, field) => {
+      setButtonDisabled(false);
+      const value = e.target.value;
+      setSongInfo({...songInfo, [field]: value});
+    }
+
+    return (
+        <>
+        <form onSubmit={(e) => submit(e)}>
+{/*
+            what is fieldset? allows disabling of form by calling fieldset.disabled
+
+            htmlFor? 
+                              
+                  onChange= e => setButtonDisabled(e.target.value === "gre")
+              
+        */}
             <fieldset id="fieldset">
               <label
-                htmlFor="greeting"
+                htmlFor="songname"
                 style={{
                   display: 'block',
                   color: 'var(--gray)',
                   marginBottom: '0.5em'
                 }}
-              >
-                Enter song for sale
-              </label>
+              >Enter song for sale</label>
               <div style={{ display: 'flex' }}>
                 <input
                   autoComplete="off"
-                  defaultValue="enter song name here"
-                  id="song"
-                  onChange={e => setButtonDisabled(e.target.value === "greeting")}
+                  defaultValue="enter song info here"
+                  id="songname"
+                  onChange={e => updateSongInfo(e, 'songname')}
                   style={{ flex: 1 }}
+                />
+              <label htmlFor="price">Price</label>
+                <input
+                  autoComplete="off"
+                  id="price"
+                  type="number"
+                  onChange={e => updateSongInfo(e, 'price')}
                 />
                 <button
                   disabled={buttonDisabled}
