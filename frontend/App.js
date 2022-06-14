@@ -8,6 +8,7 @@ import getConfig from './assets/js/near/config'
 import Header from './assets/js/Header.js';
 import SongList from './assets/js/SongList.js';
 import AddSong from './assets/js/AddSong';
+import { async } from 'regenerator-runtime';
 
 
 export default function App() {
@@ -17,9 +18,12 @@ export default function App() {
 //  const [song, setSong] = React.useState()
  // const[songList, setSongList] = useState(["test setSonglist usestate"]);
   const[songCatalog, setSongCatalog] = useState("test songcatalog");
-  //setSongCatalog(get_song_catalog(window.accountId));
+  console.log("setSongcatalog");
+  //const[songCatalog, setSongCatalog] = useState(get_song_catalog());
+
+  //setSongCatalog(get_song_catalog());
   //setSongCatalog("newsongs");
-  //get_song_catalog(window.accountId)
+  //get_song_catalog()
 
   // when the user has not yet interacted with the form, disable the button
   //const [buttonDisabled, setButtonDisabled] = React.useState(true)
@@ -31,6 +35,12 @@ export default function App() {
   // Learn more: https://reactjs.org/docs/hooks-intro.html
   React.useEffect(
     () => {
+      const init = async () => {
+        let song_catalog = await get_song_catalog();
+        console.log(song_catalog);
+        setSongCatalog(song_catalog[0].song_name);
+      };
+      init()
     //  const[songList, setSongList] = useState(["test setSonglist usestate"]);
       //setSongCatalog(get_song_catalog(window.accountId))
       // get_greeting is in near/utils.js

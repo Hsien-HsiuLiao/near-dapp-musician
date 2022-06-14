@@ -57,9 +57,7 @@ export async function get_greeting(){
   return greeting
 }
 
-export async function get_song_catalog(account_id){
-  let song_catalog = await window.contract.get_song_catalog({
-    args:{account_id: account_id}
-  });
+export async function get_song_catalog(){
+  let song_catalog = await window.contract.get_song_catalog();
   return song_catalog
 }
