@@ -15,6 +15,8 @@ use near_sdk::collections::*;
 // Define the contract structure
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize, Debug)]
+//#[serde(crate = "near_sdk::serde")]
+
 pub struct Contract {
     songs_by_artist: UnorderedMap<AccountId, SongList>,
     //songs_by_artist: UnorderedMap<AccountId, String>,
@@ -104,11 +106,14 @@ impl Contract {
       // log!("predecessor: {:?}", &env::predecessor_account_id());
     }
 
-    pub fn get_song_catalog(&self) -> Vec<SongInfo> {
+    pub fn get_song_catalog(&self) -> UnorderedMap<AccountId, SongList> {
+        //pub fn get_song_catalog(self) -> UnorderedMap<AccountId, SongList> {
+
        // return self.song_for_sale.clone()
       // self.songs_by_artist.get(&account_id)
       //unimplemented!()
-      self.songs_by_artist.get(&env::predecessor_account_id()).unwrap_or_default().songs
+      let song_catalog = &self.songs_by_artist;
+      song_catalog.clone()
     }
 /* 
     pub fn set_status(&mut self, status: String) {
