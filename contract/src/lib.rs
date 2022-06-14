@@ -40,7 +40,7 @@ impl Default for SongList {
 #[serde(crate = "near_sdk::serde")]
 pub struct SongInfo {
     song_name: String,
-    price: u8
+    price: f32
 }
 
 
@@ -86,7 +86,7 @@ impl Contract {
         //self.message = message;
     }
 
-    pub fn add_song(&mut self, song_name: String, price: u8) {
+    pub fn add_song_info(&mut self, song_name: String, price: f32) {
        // self.songs_by_artist.insert(&env::predecessor_account_id(), &song);
        //if SongList{songs>0}, init song_info
        //let mut song_info: Vec<SongInfo> = Vec::new();
@@ -104,10 +104,11 @@ impl Contract {
       // log!("predecessor: {:?}", &env::predecessor_account_id());
     }
 
-    pub fn get_song(&self) -> String {
+    pub fn get_song_catalog(&self) -> Vec<SongInfo> {
        // return self.song_for_sale.clone()
       // self.songs_by_artist.get(&account_id)
-      unimplemented!()
+      //unimplemented!()
+      self.songs_by_artist.get(&env::predecessor_account_id()).unwrap_or_default().songs
     }
 /* 
     pub fn set_status(&mut self, status: String) {
