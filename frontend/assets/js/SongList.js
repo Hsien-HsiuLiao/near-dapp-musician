@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-async function SongList({songList}) {
+function SongList() {
    // let song_catalog= await get_song_catalog();
     return (
         <div>
@@ -18,11 +18,7 @@ async function SongList({songList}) {
                     
                 </tbody>
             </table>
-            <footer>
-                {songList}
-            </footer>
-        </div>
-        
+        </div>   
     );
 }
 const songListStyle = {

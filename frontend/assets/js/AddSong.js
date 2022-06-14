@@ -83,7 +83,6 @@ function AddSong ({add_song_info}) {
               <div style={{ display: 'flex' }}>
                 <input
                   autoComplete="off"
-                  defaultValue="enter song info here"
                   id="songname"
                   onChange={e => updateSongInfo(e, 'songname')}
                   style={{ flex: 1 }}

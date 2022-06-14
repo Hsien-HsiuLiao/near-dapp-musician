@@ -16,7 +16,7 @@ export default function App() {
   //use React Hooks to store song in component state
 //  const [song, setSong] = React.useState()
  // const[songList, setSongList] = useState(["test setSonglist usestate"]);
-  const[songCatalog, setSongCatalog] = useState("test songcaotalog");
+  //const[songCatalog, setSongCatalog] = useState("test songcaotalog");
 
   // when the user has not yet interacted with the form, disable the button
   //const [buttonDisabled, setButtonDisabled] = React.useState(true)
@@ -28,7 +28,7 @@ export default function App() {
   // Learn more: https://reactjs.org/docs/hooks-intro.html
   React.useEffect(
     () => {
-      const[songList, setSongList] = useState(["test setSonglist usestate"]);
+    //  const[songList, setSongList] = useState(["test setSonglist usestate"]);
 
       // get_greeting is in near/utils.js
   /*
@@ -36,7 +36,7 @@ export default function App() {
         .then(greetingFromContract => {
           setGreeting(greetingFromContract)
         })
-        lsndlsnvdsl
+        
   */
     },
 
@@ -85,7 +85,7 @@ export default function App() {
       <main>
       <Header />
       
-      <SongList songList={songList}/>
+      <SongList />
         
         <div>
       {/* 
