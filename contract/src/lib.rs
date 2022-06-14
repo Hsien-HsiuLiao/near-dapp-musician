@@ -23,7 +23,9 @@ pub struct Contract {
 //    pub song_for_sale: String,
 }
  
-#[derive(BorshDeserialize, BorshSerialize, Debug)]
+//#[derive(BorshDeserialize, BorshSerialize, Debug)]
+#[derive(BorshDeserialize, BorshSerialize, Deserialize, Serialize, Debug)]
+#[serde(crate = "near_sdk::serde")]
 pub struct SongList {
     songs: Vec<SongInfo>,
 //songs: Vec<String>,
@@ -106,14 +108,13 @@ impl Contract {
       // log!("predecessor: {:?}", &env::predecessor_account_id());
     }
 
-    pub fn get_song_catalog(&self) -> UnorderedMap<AccountId, SongList> {
-        //pub fn get_song_catalog(self) -> UnorderedMap<AccountId, SongList> {
+    //pub fn get_song_catalog(&self) -> UnorderedMap<AccountId, SongList> {
+        pub fn get_song_catalog(&self, account_id: AccountId) -> SongList {
 
        // return self.song_for_sale.clone()
       // self.songs_by_artist.get(&account_id)
       //unimplemented!()
-      let song_catalog = &self.songs_by_artist;
-      song_catalog.clone()
+      self.songs_by_artist.get(&account_id).unwrap()
     }
 /* 
     pub fn set_status(&mut self, status: String) {
