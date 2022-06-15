@@ -110,14 +110,14 @@ impl Contract {
 
     //pub fn get_song_catalog(&self) -> UnorderedMap<AccountId, SongList> {
        //pub fn get_song_catalog(&self, account_id: AccountId) -> SongList {
-        pub fn get_song_catalog(&self) -> Vec<SongInfo> {
+        pub fn get_song_catalog(&self) -> SongList {
 
        // return self.song_for_sale.clone()
       // self.songs_by_artist.get(&account_id)
       //unimplemented!()
       //self.songs_by_artist.get(&account_id).unwrap()
       log!("get_song_catalog called");
-          vec![SongInfo{song_name: "testnamefromrust".to_string(), price: 11.0}]
+          SongList{songs: vec![SongInfo{song_name: "testnamefromrust".to_string(), price: 11.0}]}
       
       
     }

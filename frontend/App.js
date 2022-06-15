@@ -38,7 +38,7 @@ export default function App() {
       const init = async () => {
         let song_catalog = await get_song_catalog();
         console.log(song_catalog);
-        setSongCatalog(song_catalog[0].song_name);
+        setSongCatalog(song_catalog.songs[0].song_name);
       };
       init()
     //  const[songList, setSongList] = useState(["test setSonglist usestate"]);
