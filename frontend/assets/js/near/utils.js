@@ -62,7 +62,7 @@ export async function get_song_catalog(account_id){
   console.log("typeof account_id ", account_id);
   console.log(window.contract);
   let song_catalog = await window.contract.get_song_catalog({
-    args:{account_id: 7, num: 7}
+    account_id: account_id
   });
   //console.logs("args ", {args});
   return song_catalog

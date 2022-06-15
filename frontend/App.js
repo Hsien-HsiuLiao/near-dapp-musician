@@ -36,9 +36,9 @@ export default function App() {
   React.useEffect(
     () => {
       const init = async () => {
-        console.log("typeof", typeof window.accountId);
+        console.log("id", window.accountId);
         try {
-        let song_catalog = await get_song_catalog("hliao.testnet");
+        let song_catalog = await get_song_catalog(window.accountId);
         console.log(song_catalog);
         //setSongCatalog(song_catalog.songs[0].song_name);
         } catch (e) {
@@ -110,7 +110,7 @@ export default function App() {
           song name: {song}
       */}
         </div>
-      <AddSong add_song_info={add_song_info}/>
+      <AddSong add_song_info={add_song_info} get_song_catalog={get_song_catalog}/>
       
         
         

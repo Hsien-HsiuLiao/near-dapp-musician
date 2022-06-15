@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 //import { add_song } from './near/utils';
 import getConfig from './near/config';
 
-function AddSong ({add_song_info}) {
+function AddSong ({add_song_info, get_song_catalog}) {
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [song, setSong] = useState();
     const [songInfo, setSongInfo] = useState(undefined);
     const [showNotification, setShowNotification] = useState(false);
+    const[songCatalog, setSongCatalog] = useState("add song component");
 
     const submit = async event => {
       event.preventDefault()
@@ -39,7 +40,11 @@ function AddSong ({add_song_info}) {
               // re-enable the form, whether the call succeeded or failed
               fieldset.disabled = false
             }
-  
+            let song_catalog = await get_song_catalog(window.accountId);
+        console.log("after call add_song:",song_catalog.songs[0].song_name);
+        //  song_catalog.songs[0].song_name
+
+            setSongCatalog(song_catalog.songs[0].song_name);
             // update local `greeting` variable to match persisted value
             //setGreeting(newGreeting)
             setSong(newSong)
@@ -62,8 +67,10 @@ function AddSong ({add_song_info}) {
 
     return (
         <>
+        {songCatalog}
         <form onSubmit={(e) => submit(e)}>
 {/*
+  song_catalog.songs[0].song_name
             what is fieldset? allows disabling of form by calling fieldset.disabled
 
             htmlFor? 
