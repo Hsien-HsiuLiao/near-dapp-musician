@@ -48,7 +48,7 @@ export async function set_greeting(message){
 export async function add_song_info(songname, price) {
   console.log("songname ",songname );
   let response = await window.contract.add_song_info({
-    args:{song_name: songname, price}
+    args:{song_name: songname, price, jib: price}
   })
   return response
 }
@@ -59,10 +59,11 @@ export async function get_greeting(){
 }
 
 export async function get_song_catalog(account_id){
-  console.log("typeof account_id ", typeof account_id);
+  console.log("typeof account_id ", account_id);
+  console.log(window.contract);
   let song_catalog = await window.contract.get_song_catalog({
     args:{account_id: 7, num: 7}
   });
-  console.logs("args ", args);
+  //console.logs("args ", {args});
   return song_catalog
 }

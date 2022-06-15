@@ -38,8 +38,7 @@ export default function App() {
       const init = async () => {
         console.log("typeof", typeof window.accountId);
         try {
-        //let song_catalog = 
-        await get_song_catalog("hliao.testnet");
+        let song_catalog = await get_song_catalog("hliao.testnet");
         console.log(song_catalog);
         //setSongCatalog(song_catalog.songs[0].song_name);
         } catch (e) {
