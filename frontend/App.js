@@ -1,4 +1,4 @@
-//import 'regenerator-runtime/runtime'
+import 'regenerator-runtime/runtime'
 import React, {useState} from 'react'
 
 import './assets/css/global.css'
@@ -8,7 +8,7 @@ import getConfig from './assets/js/near/config'
 import Header from './assets/js/Header.js';
 import SongList from './assets/js/SongList.js';
 import AddSong from './assets/js/AddSong';
-import { async } from 'regenerator-runtime';
+//import { async } from 'regenerator-runtime';
 
 
 export default function App() {
@@ -36,9 +36,15 @@ export default function App() {
   React.useEffect(
     () => {
       const init = async () => {
-        let song_catalog = await get_song_catalog();
+        console.log("typeof", typeof window.accountId);
+        try {
+        //let song_catalog = 
+        await get_song_catalog("hliao.testnet");
         console.log(song_catalog);
-        setSongCatalog(song_catalog.songs[0].song_name);
+        //setSongCatalog(song_catalog.songs[0].song_name);
+        } catch (e) {
+          console.log(e)
+        }
       };
       init()
     //  const[songList, setSongList] = useState(["test setSonglist usestate"]);
