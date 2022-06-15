@@ -1,8 +1,9 @@
 import React from 'react';
 
 
-function SongList() {
+function SongList({song_catalog}) {
    // let song_catalog= await get_song_catalog();
+   console.log("song_catalog passsed to SongList component", song_catalog);
     return (
         <div>
             <table>
@@ -15,7 +16,10 @@ function SongList() {
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <tr>
+                        <td>songcatbody</td>
+                    </tr>
+               
                 </tbody>
             </table>
         </div>   

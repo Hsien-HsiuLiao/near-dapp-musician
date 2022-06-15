@@ -1,4 +1,5 @@
 use std::string;
+use std::thread::AccessError;
 
 /*
  * Learn more about writing NEAR smart contracts with Rust:
@@ -24,7 +25,16 @@ pub struct Contract {
     //songs_by_artist: UnorderedMap<AccountId, String>,
 //    pub song_for_sale: String,
 }
- 
+
+//impl Copy for near_sdk::collections::UnorderedMap<AccountId, String> {
+//}
+/* 
+impl Clone for near_sdk::collections::UnorderedMap<AccountId, String> {
+    fn clone(&self) -> UnorderedMap<K, V> {
+        *self
+    }
+}
+*/
 //#[derive(BorshDeserialize, BorshSerialize, Debug)]
 #[derive(BorshDeserialize, BorshSerialize, Deserialize, Serialize, Debug)]
 #[serde(crate = "near_sdk::serde")]
@@ -121,10 +131,13 @@ impl Contract {
       log!("get_song_catalog called");
       log!("id {}", account_id);
       log!("get songs by id {:?}", self.songs_by_artist.get(&account_id).unwrap_or_default());
-          SongList{songs: vec![SongInfo{song_name: "testnamefromrust".to_string(), price: 11.0}]}
-      
+        //  SongList{songs: vec![SongInfo{song_name: "testnamefromrust".to_string(), price: 11.0}]}
+      self.songs_by_artist.get(&account_id).unwrap_or_default()
       
     }
+
+    
+    
 /* 
     pub fn set_status(&mut self, status: String) {
         self.songs_by_artist.insert(&env::predecessor_account_id(), &status);

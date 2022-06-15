@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 //import { add_song } from './near/utils';
 import getConfig from './near/config';
 
-function AddSong ({add_song_info, get_song_catalog}) {
+function AddSong ({add_song_info, get_song_catalog, addSongInfo}) {
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [song, setSong] = useState();
     const [songInfo, setSongInfo] = useState(undefined);
@@ -15,40 +15,17 @@ function AddSong ({add_song_info, get_song_catalog}) {
             // get elements from the form using their id attribute
             //const { fieldset, greeting } = event.target.elements
             const { fieldset, song } = event.target.elements
-  
             // hold onto new user-entered value from React's SynthenticEvent for use after `await` call
             //const newGreeting = greeting.value
-            const newSong = songname.value
-            const parsedPrice = parseFloat(songInfo.price)
-  
             // disable the form while the value gets updated on-chain
             fieldset.disabled = true
-  
-            try {
-              // make an update call to the smart contract
-              // pass the value that the user entered in the greeting field
-              //await set_greeting(newGreeting)
-              await add_song_info(songInfo.songname, parsedPrice)
-            } catch (e) {
-              alert(
-                'Something went wrong! ' +
-                'Maybe you need to sign out and back in? ' +
-                'Check your browser console for more info.'
-              )
-              throw e
-            } finally {
+            await addSongInfo(songInfo)
+           {/*  
+             finally {}
+             */}
               // re-enable the form, whether the call succeeded or failed
               fieldset.disabled = false
-            }
-            let song_catalog = await get_song_catalog(window.accountId);
-        console.log("after call add_song:",song_catalog.songs[0].song_name);
-        //  song_catalog.songs[0].song_name
 
-            setSongCatalog(song_catalog.songs[0].song_name);
-            // update local `greeting` variable to match persisted value
-            //setGreeting(newGreeting)
-            setSong(newSong)
-  
             // show Notification
             setShowNotification(true)
   
@@ -90,6 +67,7 @@ function AddSong ({add_song_info, get_song_catalog}) {
               <div style={{ display: 'flex' }}>
                 <input
                   autoComplete="off"
+                  defaultValue=""
                   id="songname"
                   onChange={e => updateSongInfo(e, 'songname')}
                   style={{ flex: 1 }}
@@ -97,6 +75,7 @@ function AddSong ({add_song_info, get_song_catalog}) {
               <label htmlFor="price">Price</label>
                 <input
                   autoComplete="off"
+                  defaultValue=""
                   id="price"
                   type="text"
                   onChange={e => updateSongInfo(e, 'price')}

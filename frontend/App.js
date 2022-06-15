@@ -17,7 +17,7 @@ export default function App() {
   //use React Hooks to store song in component state
 //  const [song, setSong] = React.useState()
  // const[songList, setSongList] = useState(["test setSonglist usestate"]);
-  const[songCatalog, setSongCatalog] = useState("test songcatalog");
+  const[songCatalog, setSongCatalog] = useState([]);
   console.log("setSongcatalog");
   //const[songCatalog, setSongCatalog] = useState(get_song_catalog());
 
@@ -41,6 +41,7 @@ export default function App() {
         let song_catalog = await get_song_catalog(window.accountId);
         console.log(song_catalog);
         //setSongCatalog(song_catalog.songs[0].song_name);
+        setSongCatalog(song_catalog);
         } catch (e) {
           console.log(e)
         }
@@ -93,6 +94,36 @@ export default function App() {
     )
   }
 
+  const addSongInfo = async (songInfo) => {
+    const newSong = songname.value
+            const parsedPrice = parseFloat(songInfo.price)
+            try {
+              // make an update call to the smart contract
+              // pass the value that the user entered in the greeting field
+              //await set_greeting(newGreeting)
+              await add_song_info(songInfo.songname, parsedPrice)
+            } catch (e) {
+              alert(
+                'Something went wrong! ' +
+                'Maybe you need to sign out and back in? ' +
+                'Check your browser console for more info.'
+              )
+              throw e
+            }
+
+                        
+            let song_catalog = await get_song_catalog(window.accountId);
+        console.log("after call add_song:",song_catalog.songs[0].song_name);
+        //  song_catalog.songs[0].song_name
+
+            //setSongCatalog(song_catalog.songs[0].song_name);
+            setSongCatalog(song_catalog);
+            // update local `greeting` variable to match persisted value
+            //setGreeting(newGreeting)
+           // setSong(newSong)
+  
+  }
+
   return (
     // use React Fragment, <>, to avoid wrapping elements in unnecessary divs
     <>
@@ -102,15 +133,15 @@ export default function App() {
       
       <main>
       <Header />
-      {songCatalog}
-      <SongList />
+      {}
+      <SongList song_catalog={songCatalog}/>
         
         <div>
       {/* 
           song name: {song}
       */}
         </div>
-      <AddSong add_song_info={add_song_info} get_song_catalog={get_song_catalog}/>
+      <AddSong add_song_info={add_song_info} get_song_catalog={get_song_catalog} addSongInfo={addSongInfo}/>
       
         
         
