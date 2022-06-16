@@ -12,8 +12,6 @@ import AddSong from './assets/js/AddSong';
 
 
 export default function App() {
-  // use React Hooks to store greeting in component state
-  //const [greeting, setGreeting] = React.useState()
   //use React Hooks to store song in component state
 //  const [song, setSong] = React.useState()
  // const[songList, setSongList] = useState(["test setSonglist usestate"]);
@@ -49,14 +47,6 @@ export default function App() {
       init()
     //  const[songList, setSongList] = useState(["test setSonglist usestate"]);
       //setSongCatalog(get_song_catalog(window.accountId))
-      // get_greeting is in near/utils.js
-  /*
-      get_greeting()
-        .then(greetingFromContract => {
-          setGreeting(greetingFromContract)
-        })
-        
-  */
     },
 
     // The second argument to useEffect tells React when to re-run the effect
@@ -99,8 +89,6 @@ export default function App() {
             const parsedPrice = parseFloat(songInfo.price)
             try {
               // make an update call to the smart contract
-              // pass the value that the user entered in the greeting field
-              //await set_greeting(newGreeting)
               await add_song_info(songInfo.songname, parsedPrice)
             } catch (e) {
               alert(
@@ -109,19 +97,12 @@ export default function App() {
                 'Check your browser console for more info.'
               )
               throw e
-            }
-
-                        
+            }       
             let song_catalog = await get_song_catalog(window.accountId);
         console.log("after call add_song:",song_catalog.songs[0].song_name);
         //  song_catalog.songs[0].song_name
-
             //setSongCatalog(song_catalog.songs[0].song_name);
             setSongCatalog(song_catalog);
-            // update local `greeting` variable to match persisted value
-            //setGreeting(newGreeting)
-           // setSong(newSong)
-  
   }
 
   return (
@@ -135,16 +116,12 @@ export default function App() {
       <Header />
       {}
       <SongList song_catalog={songCatalog}/>
-        
         <div>
       {/* 
           song name: {song}
       */}
         </div>
       <AddSong add_song_info={add_song_info} get_song_catalog={get_song_catalog} addSongInfo={addSongInfo}/>
-      
-        
-        
         <hr />
         <p>
           <a target="_blank" rel="noreferrer" href="https://docs.near.org">NEAR docs</a>
