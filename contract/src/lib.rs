@@ -12,9 +12,6 @@ use near_sdk::{log, near_bindgen, env, AccountId, PanicOnDefault,
                 serde::{Deserialize, Serialize}};
 use near_sdk::collections::*;
 
-// Define the default message
-//const DEFAULT_MESSAGE: &str = "Hello";
-
 // Define the contract structure
 #[near_bindgen]
 #[derive(BorshDeserialize, BorshSerialize, Debug)]
@@ -23,24 +20,13 @@ use near_sdk::collections::*;
 pub struct Contract {
     songs_by_artist: UnorderedMap<AccountId, SongList>,
     //songs_by_artist: UnorderedMap<AccountId, String>,
-//    pub song_for_sale: String,
 }
 
-//impl Copy for near_sdk::collections::UnorderedMap<AccountId, String> {
-//}
-/* 
-impl Clone for near_sdk::collections::UnorderedMap<AccountId, String> {
-    fn clone(&self) -> UnorderedMap<K, V> {
-        *self
-    }
-}
-*/
 //#[derive(BorshDeserialize, BorshSerialize, Debug)]
 #[derive(BorshDeserialize, BorshSerialize, Deserialize, Serialize, Debug)]
 #[serde(crate = "near_sdk::serde")]
 pub struct SongList {
     songs: Vec<SongInfo>,
-//songs: Vec<String>,
 }
 
 impl Default for SongList {
@@ -65,11 +51,9 @@ pub struct SongInfo {
 
 impl Default for Contract{
     fn default() -> Self{
-        //Self{message: DEFAULT_MESSAGE.to_string()}
         log!("default!");
         Self{
             songs_by_artist: UnorderedMap::new(b"s".to_vec()),
-         //   song_for_sale: "none".to_string(),
         }
     }
 }
@@ -102,6 +86,7 @@ impl Contract {
         //self.message = message;
     }
 
+    //Public method
     pub fn add_song_info(&mut self, song_name: String, price: f32) {
        // self.songs_by_artist.insert(&env::predecessor_account_id(), &song);
        //if SongList{songs>0}, init song_info
@@ -119,14 +104,13 @@ impl Contract {
       // log!("get_song: {:?}", get_song_list[0].song_name);
       // log!("predecessor: {:?}", &env::predecessor_account_id());
     }
-
+    //Public method
     //pub fn get_song_catalog(&self) -> UnorderedMap<AccountId, SongList> {
        pub fn get_song_catalog(&self, account_id: AccountId) -> SongList {
        // pub fn get_song_catalog(&self) -> SongList {
 
        // return self.song_for_sale.clone()
       // self.songs_by_artist.get(&account_id)
-      //unimplemented!()
       //self.songs_by_artist.get(&account_id).unwrap()
       log!("get_song_catalog called");
       log!("id {}", account_id);
