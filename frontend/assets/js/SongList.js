@@ -28,12 +28,15 @@ function SongList({song_catalog}) {
                             <td>{catalog[1].songs.map(songinfo => (
                                 <tr>{songinfo.price}</tr>
                             ))}</td>
-                            
+                            <td>{catalog[1].songs.map(songinfo => (
+                                <tr><button>Buy</button></tr>
+                                
+                            ))}</td>
                             {/* 
                             <td>{catalog[1].songs[0].song_name}</td>
                             <td>{catalog[1].songs[0].price}</td>
                             */}
-                            <td><button>Buy</button></td>
+                            
                         </tr>
                     ))}
                 </tbody>
