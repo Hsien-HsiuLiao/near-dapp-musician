@@ -99,7 +99,7 @@ export default function App() {
               throw e
             }       
             let song_catalog = await get_song_catalog(window.accountId);
-        console.log("after call add_song:",song_catalog.songs[0].song_name);
+       // console.log("after call add_song:",song_catalog.songs[0].song_name);
         //  song_catalog.songs[0].song_name
             //setSongCatalog(song_catalog.songs[0].song_name);
             setSongCatalog(song_catalog);

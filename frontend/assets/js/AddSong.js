@@ -7,7 +7,7 @@ function AddSong ({add_song_info, get_song_catalog, addSongInfo}) {
     const [song, setSong] = useState();
     const [songInfo, setSongInfo] = useState(undefined);
     const [showNotification, setShowNotification] = useState(false);
-    const[songCatalog, setSongCatalog] = useState("add song component");
+    const[songCatalog, setSongCatalog] = useState("setSongCatalog");
 
     const submit = async event => {
       event.preventDefault()
