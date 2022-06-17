@@ -11,7 +11,7 @@ function SongList({song_catalog}) {
                 <thead>
                     <tr>
                         <th>Artist</th>
-                        <th>Song Number</th>
+                     {/*    <th>Song Number</th> */}
                         <th>Song Name</th>
                         <th>Price (NEAR)</th>
                     </tr>
@@ -20,16 +20,20 @@ function SongList({song_catalog}) {
                     {song_catalog.map(catalog => (
                         <tr>
                             <td>{catalog[0]}</td>
-                            {catalog[1].songs.map(songinfo =>(
+                            <td>{catalog[1].songs.map(songinfo =>(
                                 <tr>
-                                <td>{songinfo.song_name}</td>
-                                <td>{songinfo.price}</td>
+                                {songinfo.song_name}
                                 </tr>
-                            ))}
+                            ))}</td>
+                            <td>{catalog[1].songs.map(songinfo => (
+                                <tr>{songinfo.price}</tr>
+                            ))}</td>
+                            
                             {/* 
                             <td>{catalog[1].songs[0].song_name}</td>
                             <td>{catalog[1].songs[0].price}</td>
                             */}
+                            <td><button>Buy</button></td>
                         </tr>
                     ))}
                 </tbody>
