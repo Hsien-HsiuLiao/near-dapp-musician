@@ -120,6 +120,16 @@ impl Contract {
       self.songs_by_artist.to_vec()
     }
 
+    /* pub fn remove_song_info(&mut self, account_id:AccountId, key:u8) {
+        assert(caller==same_acct_that added_song)
+        let get_songinfo = self.songs_by_artist.get(&account_id).unwrap_or_default();
+       log!("songinfo: {:?}", &get_songinfo);
+       let mut get_song_list = get_songinfo.songs;
+       let mut song_list = get_song_list;
+        remove by key?
+        song_list.remove(key)
+    }
+     */
     
     
 /* 
