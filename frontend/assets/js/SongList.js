@@ -33,6 +33,13 @@ function SongList({song_catalog}) {
                                 
                             ))}</td>
                             {/* 
+                            delete button only for song owner
+                            {
+                                window.accountId == catalog[0]
+                                &&<button>delete</button>
+                            }
+                            catalog[0] = accountId (key)
+                            catalog[1] = songList   (value)
                             <td>{catalog[1].songs[0].song_name}</td>
                             <td>{catalog[1].songs[0].price}</td>
                             */}
