@@ -120,10 +120,11 @@ impl Contract {
       self.songs_by_artist.to_vec()
     }
 
+    /* 
     pub fn test_get_song_catalog(&self) -> &UnorderedMap<AccountId, SongList> {
-        &self.songs_by_artist
+       &self.songs_by_artist
     }
-
+    */
     /* pub fn remove_song_info(&mut self, account_id:AccountId, key:u8) {
         assert(caller==same_acct_that added_song)
         let get_songinfo = self.songs_by_artist.get(&account_id).unwrap_or_default();
