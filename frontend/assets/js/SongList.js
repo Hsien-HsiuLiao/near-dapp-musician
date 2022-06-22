@@ -32,6 +32,9 @@ function SongList({song_catalog}) {
                                 <tr><button>Buy</button></tr>
                                 
                             ))}</td>
+                            <td>{catalog[1].songs.map(songinfo => (
+                                <tr>{window.accountId == catalog[0] && <button>delete</button>}</tr>
+                            ))}</td>
                             {/* 
                             delete button only for song owner
                             {
