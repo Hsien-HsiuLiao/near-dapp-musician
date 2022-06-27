@@ -60,19 +60,11 @@ export default function App() {
     return (
       <main>
         <h1>
-          <label
-            htmlFor="greeting"
-            style={{
-              color: 'var(--secondary)',
-              borderBottom: '2px solid var(--secondary)'
-            }}
-          >
-            greeting
-          </label>!
+          
           Welcome to NEAR!
         </h1>
         <p>
-         Please sign in using the NEAR Wallet. Click the button below.
+         Please sign in using the NEAR Wallet. Click the Sign In button below.
         </p>
         <p>
         This app runs in the test network ("testnet").

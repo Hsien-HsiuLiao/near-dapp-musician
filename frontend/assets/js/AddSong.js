@@ -63,7 +63,7 @@ function AddSong ({add_song_info, get_song_catalog, addSongInfo}) {
                   color: 'var(--gray)',
                   marginBottom: '0.5em'
                 }}
-              >Enter song for sale</label>
+              >Musicians, input your song for sale</label>
               <div style={{ display: 'flex' }}>
                 <input
                   autoComplete="off"

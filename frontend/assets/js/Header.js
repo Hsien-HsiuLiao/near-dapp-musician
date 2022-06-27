@@ -4,21 +4,10 @@ function Header() {
     return (
         <header style={headerstyle}>
            <h1>
-          <label
-            htmlFor="greeting"
-            style={{
-              color: 'var(--secondary)',
-              borderBottom: '2px solid var(--secondary)'
-            }}
-          >
-            hey yo
-          </label>
+          Hello, 
           {' '/* React trims whitespace around tags; insert literal space character when needed */}
           {window.accountId}!
         </h1>
-        <p>
-          Welcome Musician!
-        </p>
         </header>
     );
 }
