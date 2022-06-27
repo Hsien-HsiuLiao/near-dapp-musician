@@ -6,9 +6,9 @@ function SongList({song_catalog}) {
    console.log("song_catalog passsed to SongList component", song_catalog);
    //console.log(song_catalog[0][1].songs[0].song_name);
     return (
-        <div>
-            <table>
-                <thead>
+        <div style={songListStyle}>
+            <table style={tableStyle}>
+                <thead style={tableStyle}>
                     <tr>
                         <th>Artist</th>
                      {/*    <th>Song Number</th> */}
@@ -55,9 +55,14 @@ function SongList({song_catalog}) {
     );
 }
 const songListStyle = {
-    background: '#333',
+    background: '#000',
     color: '#fff',
     padding: '10px'
+}
+
+const tableStyle = {
+    width: '100%',
+    border: '1px solid white'
 }
 
 export default SongList;
