@@ -1,5 +1,5 @@
-use std::string;
-use std::thread::AccessError;
+//use std::string;
+//use std::thread::AccessError;
 
 /*
  * Learn more about writing NEAR smart contracts with Rust:
