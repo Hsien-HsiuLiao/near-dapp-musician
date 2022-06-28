@@ -8,20 +8,11 @@ import getConfig from './assets/js/near/config'
 import Header from './assets/js/Header.js';
 import SongList from './assets/js/SongList.js';
 import AddSong from './assets/js/AddSong';
-//import { async } from 'regenerator-runtime';
-
 
 export default function App() {
   //use React Hooks to store song in component state
-//  const [song, setSong] = React.useState()
- // const[songList, setSongList] = useState(["test setSonglist usestate"]);
   const[songCatalog, setSongCatalog] = useState([]);
   console.log("setSongcatalog");
-  //const[songCatalog, setSongCatalog] = useState(get_song_catalog());
-
-  //setSongCatalog(get_song_catalog());
-  //setSongCatalog("newsongs");
-  //get_song_catalog()
 
   // when the user has not yet interacted with the form, disable the button
   //const [buttonDisabled, setButtonDisabled] = React.useState(true)
@@ -45,8 +36,6 @@ export default function App() {
         }
       };
       init()
-    //  const[songList, setSongList] = useState(["test setSonglist usestate"]);
-      //setSongCatalog(get_song_catalog(window.accountId))
     },
 
     // The second argument to useEffect tells React when to re-run the effect
@@ -60,7 +49,6 @@ export default function App() {
     return (
       <main>
         <h1>
-          
           Welcome to NEAR!
         </h1>
         <p>
