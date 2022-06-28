@@ -1,6 +1,3 @@
-//use std::string;
-//use std::thread::AccessError;
-
 /*
  * Learn more about writing NEAR smart contracts with Rust:
  * https://near-docs.io/develop/Contract
@@ -19,7 +16,6 @@ use near_sdk::collections::*;
 
 pub struct Contract {
     songs_by_artist: UnorderedMap<AccountId, SongList>,
-    //songs_by_artist: UnorderedMap<AccountId, String>,
 }
 
 //#[derive(BorshDeserialize, BorshSerialize, Debug)]
@@ -37,15 +33,12 @@ impl Default for SongList {
     }
 }
 
-
 #[derive(BorshDeserialize, BorshSerialize, Deserialize, Serialize, Debug)]
 #[serde(crate = "near_sdk::serde")]
 pub struct SongInfo {
     song_name: String,
     price: f32
 }
-
-
 
 // Define the default, which automatically initializes the contract
 
@@ -88,10 +81,6 @@ impl Contract {
 
     //Public method
     pub fn add_song_info(&mut self, song_name: String, price: f32) {
-       // self.songs_by_artist.insert(&env::predecessor_account_id(), &song);
-       //if SongList{songs>0}, init song_info
-       //let mut song_info: Vec<SongInfo> = Vec::new();
-       //song_info.push(SongInfo{song_name: song, price: 1});
        let get_songinfo = self.songs_by_artist.get(&env::predecessor_account_id()).unwrap_or_default();
        log!("songinfo: {:?}", &get_songinfo);
        let mut get_song_list = get_songinfo.songs;
@@ -100,16 +89,12 @@ impl Contract {
        self.songs_by_artist.insert(&env::predecessor_account_id(), 
        &SongList{songs: song_list});
        log!("songlist: {:?}", self.songs_by_artist.get(&env::predecessor_account_id()).unwrap().songs);
-      // get_song_list.push(SongInfo{song_name: "tst".to_string(), price: 2});
       // log!("get_song: {:?}", get_song_list[0].song_name);
       // log!("predecessor: {:?}", &env::predecessor_account_id());
     }
     //Public method
-    //pub fn get_song_catalog(&self) -> UnorderedMap<AccountId, SongList> {
        //pub fn get_song_catalog(&self, account_id: AccountId) -> SongList {
         pub fn get_song_catalog(&self) -> Vec<(AccountId, SongList)> {
-
-       // return self.song_for_sale.clone()
       // self.songs_by_artist.get(&account_id)
       //self.songs_by_artist.get(&account_id).unwrap()
       log!("get_song_catalog called");
@@ -120,11 +105,6 @@ impl Contract {
       self.songs_by_artist.to_vec()
     }
 
-    /* 
-    pub fn test_get_song_catalog(&self) -> &UnorderedMap<AccountId, SongList> {
-       &self.songs_by_artist
-    }
-    */
     /* pub fn remove_song_info(&mut self, account_id:AccountId, key:u8) {
         assert(caller==same_acct_that added_song)
         let get_songinfo = self.songs_by_artist.get(&account_id).unwrap_or_default();
