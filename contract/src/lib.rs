@@ -7,7 +7,7 @@
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::{log, near_bindgen, env, AccountId, PanicOnDefault,
                 serde::{Deserialize, Serialize}};
-use near_sdk::collections::*;
+use near_sdk::{collections::*, Promise};
 
 // Define the contract structure
 #[near_bindgen]
@@ -39,6 +39,9 @@ pub struct SongInfo {
     song_name: String,
     price: f32
 }
+
+// 1 Ⓝ in yoctoNEAR
+const YOCTO_AMOUNT: u128 = 1_000_000_000_000_000_000_000_000;
 
 // Define the default, which automatically initializes the contract
 
@@ -103,6 +106,13 @@ impl Contract {
         //  SongList{songs: vec![SongInfo{song_name: "testnamefromrust".to_string(), price: 11.0}]}
       //self.songs_by_artist.get(&account_id).unwrap_or_default()
       self.songs_by_artist.to_vec()
+    }
+
+    pub fn buy_song (artist:String, song_name: String, price: f32) {
+        //yocto 1000000000000000000000000
+        let yocto = (price as u128)*YOCTO_AMOUNT;
+        Promise::create_account(artist).transfer(yocto);
+        log!("song purchased");
     }
 
     /* pub fn remove_song_info(&mut self, account_id:AccountId, key:u8) {
