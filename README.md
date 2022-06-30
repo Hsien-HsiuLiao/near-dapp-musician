@@ -5,8 +5,8 @@ This [React] app was initialized with [create-near-app]
 
       npx create-near-app --contract=rust --frontend=react my-project
 
-Resources: 
-
+Resources used for developing this dapp: 
+* https://dacade.org/communities/near/courses/near-101
 * https://www.near-sdk.io/ 
 * https://www.near-sdk.io/zero-to-hero/basics/overview)
 * https://docs.near.org/docs/api/naj-quick-reference
