@@ -3,7 +3,6 @@
  * https://near-docs.io/develop/Contract
  *
  */
-//use std::collections::HashMap;
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::{log, near_bindgen, env, AccountId, PanicOnDefault,
                 serde::{Deserialize, Serialize}};
@@ -62,27 +61,21 @@ impl Contract {
     pub fn new() -> Self {
         log!("#[init]");
         Self {
-          //  songs_by_artist: UnorderedMap::new(b"s"),
-          songs_by_artist: LookupMap::new(b"s".to_vec()),
-      //      song_for_sale: "none".to_string(),
+            songs_by_artist: UnorderedMap::new(b"s"),
         }
     }
     */
     
     // Public method - returns the greeting saved, defaulting to DEFAULT_MESSAGE
     pub fn get_greeting(&self) -> String {
-       // return self.message.clone();
-       "hey yo".to_string()
+        todo!()
     }
 
-    // Public method - accepts a greeting, such as "howdy", and records it
     pub fn set_greeting(&mut self, message: String) {
         // Use env::log to record logs permanently to the blockchain!
-        log!("Saving greeting {}", message);
-        //self.message = message;
     }
 
-    //Public method
+    //Public method - accepts song name and price, and adds aong to artist's catalog
     pub fn add_song_info(&mut self, song_name: String, price: f32) {
        let get_songinfo = self.songs_by_artist.get(&env::predecessor_account_id()).unwrap_or_default();
        log!("songinfo: {:?}", &get_songinfo);
@@ -93,15 +86,11 @@ impl Contract {
        &SongList{songs: song_list});
        log!("songlist: {:?}", self.songs_by_artist.get(&env::predecessor_account_id()).unwrap().songs);
       // log!("get_song: {:?}", get_song_list[0].song_name);
-      // log!("predecessor: {:?}", &env::predecessor_account_id());
     }
-    //Public method
-       //pub fn get_song_catalog(&self, account_id: AccountId) -> SongList {
+    //Public method - returns entire song catalog
+    //pub fn get_song_catalog(&self, account_id: AccountId) -> SongList {
     pub fn get_song_catalog(&self) -> Vec<(AccountId, SongList)> {
-      // self.songs_by_artist.get(&account_id)
-      //self.songs_by_artist.get(&account_id).unwrap()
       log!("get_song_catalog called");
-      //log!("id {}", account_id);
       //log!("get songs by id {:?}", self.songs_by_artist.get(&account_id).unwrap_or_default());
         //  SongList{songs: vec![SongInfo{song_name: "testnamefromrust".to_string(), price: 11.0}]}
       //self.songs_by_artist.get(&account_id).unwrap_or_default()
@@ -110,18 +99,17 @@ impl Contract {
 
     #[payable]
     pub fn buy_song (artist:AccountId, song_name: String, price: f32) {
-        //let yocto = (price as u128)*YOCTO_AMOUNT;
-        //Promise::create_account(artist).transfer(yocto);
         Promise::new(artist).transfer(env::attached_deposit());
         log!("song purchased");
     }
 
-    /* pub fn remove_song_info(&mut self, account_id:AccountId, key:u8) {
+    /* 
+    pub fn remove_song_info(&mut self, account_id:AccountId, key:u8) {
         assert(caller==same_acct_that added_song)
         let get_songinfo = self.songs_by_artist.get(&account_id).unwrap_or_default();
-       log!("songinfo: {:?}", &get_songinfo);
-       let mut get_song_list = get_songinfo.songs;
-       let mut song_list = get_song_list;
+        log!("songinfo: {:?}", &get_songinfo);
+        let mut get_song_list = get_songinfo.songs;
+        let mut song_list = get_song_list;
         remove by key?
         song_list.remove(key)
     }
@@ -138,9 +126,6 @@ impl Contract {
         self.songs_by_artist.remove(&env::predecessor_account_id());
     }
 
-    pub fn get_status(&self, account_id: AccountId) -> Option<String> {
-        self.songs_by_artist.get(&account_id)
-    }
     */
 }
 
