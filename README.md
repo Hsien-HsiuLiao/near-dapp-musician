@@ -3,13 +3,19 @@ NEAR dapp for Musicians
 
 This [React] app was initialized with [create-near-app]
 
-   | `npx create-near-app --contract=rust --frontend=react my-project`
+      npx create-near-app --contract=rust --frontend=react my-project
 
-(ref: https://www.near-sdk.io/, https://www.near-sdk.io/zero-to-hero/basics/overview)
+Resources: 
 
-Troubleshooting (not initialized, etc)
+* https://www.near-sdk.io/ 
+* https://www.near-sdk.io/zero-to-hero/basics/overview)
+* https://docs.near.org/docs/api/naj-quick-reference
 
-remove neardev folder (see https://www.near-sdk.io/upgrading/prototyping)
+
+
+Troubleshooting: (not initialized, etc)
+
+- remove neardev folder and run `yarn dev` again (see https://www.near-sdk.io/upgrading/prototyping)
 
 
 Quick Start
