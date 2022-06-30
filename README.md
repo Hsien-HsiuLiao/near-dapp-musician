@@ -8,7 +8,7 @@ This [React] app was initialized with [create-near-app]
 Resources used for developing this dapp: 
 * https://dacade.org/communities/near/courses/near-101
 * https://www.near-sdk.io/ 
-* https://www.near-sdk.io/zero-to-hero/basics/overview)
+* https://www.near-sdk.io/zero-to-hero/basics/overview
 * https://docs.near.org/docs/api/naj-quick-reference
 
 
