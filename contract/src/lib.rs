@@ -97,7 +97,7 @@ impl Contract {
     }
     //Public method
        //pub fn get_song_catalog(&self, account_id: AccountId) -> SongList {
-        pub fn get_song_catalog(&self) -> Vec<(AccountId, SongList)> {
+    pub fn get_song_catalog(&self) -> Vec<(AccountId, SongList)> {
       // self.songs_by_artist.get(&account_id)
       //self.songs_by_artist.get(&account_id).unwrap()
       log!("get_song_catalog called");
@@ -105,13 +105,14 @@ impl Contract {
       //log!("get songs by id {:?}", self.songs_by_artist.get(&account_id).unwrap_or_default());
         //  SongList{songs: vec![SongInfo{song_name: "testnamefromrust".to_string(), price: 11.0}]}
       //self.songs_by_artist.get(&account_id).unwrap_or_default()
-      self.songs_by_artist.to_vec()
+    self.songs_by_artist.to_vec()
     }
 
-    pub fn buy_song (artist:String, song_name: String, price: f32) {
-        //yocto 1000000000000000000000000
-        let yocto = (price as u128)*YOCTO_AMOUNT;
-        Promise::create_account(artist).transfer(yocto);
+    #[payable]
+    pub fn buy_song (artist:AccountId, song_name: String, price: f32) {
+        //let yocto = (price as u128)*YOCTO_AMOUNT;
+        //Promise::create_account(artist).transfer(yocto);
+        Promise::new(artist).transfer(env::attached_deposit());
         log!("song purchased");
     }
 
