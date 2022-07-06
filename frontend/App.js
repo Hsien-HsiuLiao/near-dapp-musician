@@ -1,9 +1,10 @@
 import 'regenerator-runtime/runtime'
-import React, {useState} from 'react'
+import React, {useState, useCallback, useEffect} from 'react'
 
 import './assets/css/global.css'
 
-import {login, logout, get_greeting, set_greeting, add_song_info, get_song_catalog} from './assets/js/near/utils'
+import {login, logout, get_greeting, set_greeting, add_song_info, get_song_catalog} from './assets/js/near/utils';
+import { accountBalance } from './assets/js/near/utils';
 import getConfig from './assets/js/near/config'
 import Header from './assets/js/Header.js';
 import SongList from './assets/js/SongList.js';
@@ -13,6 +14,15 @@ export default function App() {
   //use React Hooks to store song in component state
   const[songCatalog, setSongCatalog] = useState([]);
   console.log("setSongcatalog");
+  const [balance, setBalance] = useState("0");
+  //@ts-ignore
+  const getBalance = useCallback(async () => {
+      setBalance(await accountBalance());   
+  });
+
+  useEffect(() => {
+    getBalance();
+  }, [getBalance]);
 
   // when the user has not yet interacted with the form, disable the button
   //const [buttonDisabled, setButtonDisabled] = React.useState(true)
@@ -88,6 +98,7 @@ export default function App() {
   return (
     // use React Fragment, <>, to avoid wrapping elements in unnecessary divs
     <>
+      wallet balance: {balance} (NEAR)
       <button className="link" style={{ float: 'right' }} onClick={logout}>
         Sign out
       </button>

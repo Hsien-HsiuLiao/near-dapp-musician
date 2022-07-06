@@ -1,4 +1,5 @@
-import { connect, Contract, keyStores, WalletConnection } from 'near-api-js'
+import { connect, Contract, keyStores, WalletConnection } from 'near-api-js';
+import { formatNearAmount } from 'near-api-js/lib/utils/format';
 import getConfig from './config'
 
 const nearConfig = getConfig(process.env.NODE_ENV || 'development')
@@ -66,4 +67,12 @@ export async function get_song_catalog(account_id){
   });
   //console.logs("args ", {args});
   return song_catalog
+}
+
+export async function accountBalance() {
+  return formatNearAmount(
+    //@ts-ignore
+    (await window.walletConnection.account().getAccountBalance()).total,
+    2
+  );
 }
