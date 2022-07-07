@@ -1,7 +1,12 @@
 import React from 'react';
 
-
 function SongList({song_catalog}) {
+    const buySong = (songinfo) => {
+        //alert('heyc', param);
+        console.log("songname: ",songinfo.song_name, "| price: ", songinfo.price);
+    }
+    //? setAccountId(catalog[0])
+    //? setSongList(catalog[1])
    // let song_catalog= await get_song_catalog();
    console.log("song_catalog passsed to SongList component", song_catalog);
    //console.log(song_catalog[0][1].songs[0].song_name);
@@ -19,7 +24,7 @@ function SongList({song_catalog}) {
                 <tbody>
                     {song_catalog.map(catalog => (
                         <tr>
-                            <td>{catalog[0]}</td>
+                            <td>{catalog[0]}</td>{/*AccountId}*/}
                             <td>{catalog[1].songs.map(songinfo =>(
                                 <tr>
                                 {songinfo.song_name}
@@ -29,7 +34,7 @@ function SongList({song_catalog}) {
                                 <tr>{songinfo.price}</tr>
                             ))}</td>
                             <td>{catalog[1].songs.map(songinfo => (
-                                <tr><button>Buy</button></tr>
+                                <tr><button onClick={e => buySong(songinfo)}>Buy</button></tr>
                                 
                             ))}</td>
                             <td>{catalog[1].songs.map(songinfo => (
