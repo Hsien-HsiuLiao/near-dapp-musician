@@ -21,7 +21,7 @@ export async function initContract() {
     // View methods are read only. They don't modify the state, but usually return some value.
     viewMethods: ['get_greeting', 'get_song_catalog'],
     // Change methods can modify the state. But you don't receive the returned value when called.
-    changeMethods: ['set_greeting', 'add_song_info'],
+    changeMethods: ['set_greeting', 'add_song_info', 'buy_song'],
   })
 }
 
@@ -49,7 +49,7 @@ export async function set_greeting(message){
 export async function add_song_info(songname, price) {
   console.log("songname ",songname );
   let response = await window.contract.add_song_info({
-    args:{song_name: songname, price, jib: price}
+    args:{song_name: songname, price}
   })
   return response
 }
@@ -73,6 +73,16 @@ export async function accountBalance() {
   return formatNearAmount(
     //@ts-ignore
     (await window.walletConnection.account().getAccountBalance()).total,
-    2
+    6
   );
+}
+
+export async function buy_song(account_id, songname, price) {
+  console.log("id ",account_id, "price: ", price );
+  let response = await window.contract.buy_song({
+    artist: account_id, song_name: songname, price
+  }, "300000000000000", // attached GAS (optional)
+  "700000000000000000000000" // attached deposit in yoctoNEAR (optional)
+  )
+  return response
 }

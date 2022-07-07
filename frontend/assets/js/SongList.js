@@ -1,9 +1,12 @@
 import React from 'react';
+//import { async } from 'regenerator-runtime';
+import {buy_song} from './near/utils'
 
 function SongList({song_catalog}) {
-    const buySong = (songinfo, artist) => {
+    const buySong = async (songinfo, artist) => {
         //alert('heyc', param);
         console.log(artist, " songname: ",songinfo.song_name, "| price: ", songinfo.price);
+        await buy_song(artist, songinfo.song_name, songinfo.price);
     }
     //? setAccountId(catalog[0])
     //? setSongList(catalog[1])
@@ -31,10 +34,10 @@ function SongList({song_catalog}) {
                                 </tr>
                             ))}</td>
                             <td>{catalog[1].songs.map(songinfo => (
-                                songinfo.price
+                                <tr>{songinfo.price}</tr>
                             ))}</td>
                             <td>{catalog[1].songs.map(songinfo => (
-                                <button onClick={() => buySong(songinfo, catalog[0])}>Buy</button>
+                                <tr><button onClick={() => buySong(songinfo, catalog[0])}>Buy</button></tr>
                                 
                             ))}</td>
                             <td>{catalog[1].songs.map(songinfo => (
