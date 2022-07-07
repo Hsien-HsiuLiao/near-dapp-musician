@@ -17,7 +17,9 @@ export default function App() {
   const [balance, setBalance] = useState("0");
   //@ts-ignore
   const getBalance = useCallback(async () => {
+    if ( window.walletConnection.account().accountId){
       setBalance(await accountBalance());   
+    }
   });
 
   useEffect(() => {
