@@ -1,9 +1,9 @@
 import React from 'react';
 
 function SongList({song_catalog}) {
-    const buySong = (songinfo) => {
+    const buySong = (songinfo, artist) => {
         //alert('heyc', param);
-        console.log("songname: ",songinfo.song_name, "| price: ", songinfo.price);
+        console.log(artist, " songname: ",songinfo.song_name, "| price: ", songinfo.price);
     }
     //? setAccountId(catalog[0])
     //? setSongList(catalog[1])
@@ -31,10 +31,10 @@ function SongList({song_catalog}) {
                                 </tr>
                             ))}</td>
                             <td>{catalog[1].songs.map(songinfo => (
-                                <tr>{songinfo.price}</tr>
+                                songinfo.price
                             ))}</td>
                             <td>{catalog[1].songs.map(songinfo => (
-                                <tr><button onClick={e => buySong(songinfo)}>Buy</button></tr>
+                                <button onClick={() => buySong(songinfo, catalog[0])}>Buy</button>
                                 
                             ))}</td>
                             <td>{catalog[1].songs.map(songinfo => (
