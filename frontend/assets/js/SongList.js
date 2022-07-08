@@ -27,21 +27,21 @@ function SongList({song_catalog}) {
                 <tbody>
                     {song_catalog.map(catalog => (
                         <tr>
-                            <td>{catalog[0]}</td>{/*AccountId}*/}
+                            <td>{catalog[0]}</td>{/*let AccountId = catalog[0], on line 31 add key? <td key=catalog[1].id>*/}
                             <td>{catalog[1].songs.map(songinfo =>(
-                                <tr>
+                                <div>
                                 {songinfo.song_name}
-                                </tr>
+                                </div>
                             ))}</td>
                             <td>{catalog[1].songs.map(songinfo => (
-                                <tr>{songinfo.price}</tr>
+                                <div>{songinfo.price}</div>
                             ))}</td>
                             <td>{catalog[1].songs.map(songinfo => (
-                                <tr><button onClick={() => buySong(songinfo, catalog[0])}>Buy</button></tr>
+                                <button style={{display:'block'}} onClick={() => buySong(songinfo, catalog[0])}>Buy</button>
                                 
                             ))}</td>
                             <td>{catalog[1].songs.map(songinfo => (
-                                <tr>{window.accountId == catalog[0] && <button>delete</button>}</tr>
+                                <div>{window.accountId == catalog[0] && <button>delete</button>}</div>
                             ))}</td>
                             {/* 
                             delete button only for song owner
