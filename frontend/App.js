@@ -3,8 +3,7 @@ import React, {useState, useCallback, useEffect} from 'react'
 
 import './assets/css/global.css'
 
-import {login, logout, get_greeting, set_greeting, add_song_info, get_song_catalog} from './assets/js/near/utils';
-import { accountBalance } from './assets/js/near/utils';
+import {login, logout, add_song_info, get_song_catalog, accountBalance} from './assets/js/near/utils';
 import getConfig from './assets/js/near/config'
 import Header from './assets/js/Header.js';
 import SongList from './assets/js/SongList.js';
@@ -110,9 +109,6 @@ export default function App() {
       {}
       <SongList song_catalog={songCatalog}/>
         <div>
-      {/* 
-          song name: {song}
-      */}
         </div>
       <AddSong add_song_info={add_song_info} get_song_catalog={get_song_catalog} addSongInfo={addSongInfo}/>
         <hr />
