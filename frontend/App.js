@@ -4,16 +4,15 @@ import React, {useState, useCallback, useEffect} from 'react'
 import './assets/css/global.css'
 
 import {login, logout, add_song_info, get_song_catalog, accountBalance} from './assets/js/near/utils';
-import getConfig from './assets/js/near/config'
+//import getConfig from './assets/js/near/config'
 import Header from './assets/js/Header.js';
 import SongList from './assets/js/SongList.js';
 import AddSong from './assets/js/AddSong';
 
 export default function App() {
-  //use React Hooks to store song in component state
   const[songCatalog, setSongCatalog] = useState([]);
-  console.log("setSongcatalog");
   const [balance, setBalance] = useState("0");
+
   //@ts-ignore
   const getBalance = useCallback(async () => {
     if ( window.walletConnection.account().accountId){
@@ -25,22 +24,11 @@ export default function App() {
     getBalance();
   }, [getBalance]);
 
-  // when the user has not yet interacted with the form, disable the button
-  //const [buttonDisabled, setButtonDisabled] = React.useState(true)
-
-  // after submitting the form, we want to show Notification
-  //const [showNotification, setShowNotification] = React.useState(false)
-
-  // The useEffect hook can be used to fire side-effects during render
-  // Learn more: https://reactjs.org/docs/hooks-intro.html
   React.useEffect(
     () => {
       const init = async () => {
-        console.log("id", window.accountId);
         try {
         let song_catalog = await get_song_catalog(window.accountId);
-        console.log(song_catalog);
-        //setSongCatalog(song_catalog.songs[0].song_name);
         setSongCatalog(song_catalog);
         } catch (e) {
           console.log(e)
@@ -49,9 +37,6 @@ export default function App() {
       init()
     },
 
-    // The second argument to useEffect tells React when to re-run the effect
-    // Use an empty array to specify "only run on first render"
-    // This works because signing into NEAR Wallet reloads the page
     []
   )
 
@@ -90,27 +75,21 @@ export default function App() {
               throw e
             }       
             let song_catalog = await get_song_catalog(window.accountId);
-       // console.log("after call add_song:",song_catalog.songs[0].song_name);
-        //  song_catalog.songs[0].song_name
-            //setSongCatalog(song_catalog.songs[0].song_name);
             setSongCatalog(song_catalog);
   }
 
   return (
     // use React Fragment, <>, to avoid wrapping elements in unnecessary divs
     <>
-      wallet balance: {balance} (NEAR)
+      <div>wallet balance: {balance} (NEAR)</div>
       <button className="link" style={{ float: 'right' }} onClick={logout}>
         Sign out
       </button>
       
       <main>
-      <Header />
-      {}
-      <SongList song_catalog={songCatalog}/>
-        <div>
-        </div>
-      <AddSong add_song_info={add_song_info} get_song_catalog={get_song_catalog} addSongInfo={addSongInfo}/>
+        <Header />
+        <SongList song_catalog={songCatalog}/>
+        <AddSong add_song_info={add_song_info} get_song_catalog={get_song_catalog} addSongInfo={addSongInfo}/>
         <hr />
         <p>
           <a target="_blank" rel="noreferrer" href="https://docs.near.org">NEAR docs</a>
@@ -123,26 +102,4 @@ export default function App() {
   )
 }
 
-// this component gets rendered by App after the form is submitted
-function Notification() {
-  const { networkId } = getConfig(process.env.NODE_ENV || 'development')
-  const urlPrefix = `https://explorer.${networkId}.near.org/accounts`
 
-  return (
-    <aside>
-      <a target="_blank" rel="noreferrer" href={`${urlPrefix}/${window.accountId}`}>
-        {window.accountId}
-      </a>
-      {' '/* React trims whitespace around tags; insert literal space character when needed */}
-      called method in contract:
-      {' '}
-      <a target="_blank" rel="noreferrer" href={`${urlPrefix}/${window.contract.contractId}`}>
-        {window.contract.contractId}
-      </a>
-      <footer>
-        <div>✔ Succeeded</div>
-        <div>Just now</div>
-      </footer>
-    </aside>
-  )
-}

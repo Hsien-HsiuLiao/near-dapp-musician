@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import getConfig from './near/config';
+import Notification from './Notification.js';
 
 function AddSong ({add_song_info, get_song_catalog, addSongInfo}) {
     const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -96,29 +97,5 @@ function AddSong ({add_song_info, get_song_catalog, addSongInfo}) {
         </>
     )
 }
-
-// this component gets rendered by App after the form is submitted
-function Notification() {
-    const { networkId } = getConfig(process.env.NODE_ENV || 'development')
-    const urlPrefix = `https://explorer.${networkId}.near.org/accounts`
-  
-    return (
-      <aside>
-        <a target="_blank" rel="noreferrer" href={`${urlPrefix}/${window.accountId}`}>
-          {window.accountId}
-        </a>
-        {' '/* React trims whitespace around tags; insert literal space character when needed */}
-        called method in contract:
-        {' '}
-        <a target="_blank" rel="noreferrer" href={`${urlPrefix}/${window.contract.contractId}`}>
-          {window.contract.contractId}
-        </a>
-        <footer>
-          <div>✔ Succeeded</div>
-          <div>Just now</div>
-        </footer>
-      </aside>
-    )
-  }
         
 export default AddSong;
