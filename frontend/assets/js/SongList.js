@@ -1,10 +1,8 @@
 import React from 'react';
-//import { async } from 'regenerator-runtime';
 import {buy_song} from './near/utils'
 
 function SongList({song_catalog}) {
     const buySong = async (songinfo, artist) => {
-        //alert('heyc', param);
         console.log(artist, " songname: ",songinfo.song_name, "| price: ", songinfo.price);
         await buy_song(artist, songinfo.song_name, songinfo.price);
     }

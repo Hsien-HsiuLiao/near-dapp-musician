@@ -4,7 +4,7 @@
  *
  */
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
-use near_sdk::{log, near_bindgen, env, AccountId, PanicOnDefault,
+use near_sdk::{log, near_bindgen, env, AccountId,
                 serde::{Deserialize, Serialize}};
 use near_sdk::{collections::*, Promise};
 
@@ -66,15 +66,6 @@ impl Contract {
     }
     */
     
-    // Public method - returns the greeting saved, defaulting to DEFAULT_MESSAGE
-    pub fn get_greeting(&self) -> String {
-        todo!()
-    }
-
-    pub fn set_greeting(&mut self, message: String) {
-        // Use env::log to record logs permanently to the blockchain!
-    }
-
     //Public method - accepts song name and price, and adds aong to artist's catalog
     pub fn add_song_info(&mut self, song_name: String, price: f32) {
        let get_songinfo = self.songs_by_artist.get(&env::predecessor_account_id()).unwrap_or_default();
@@ -85,16 +76,12 @@ impl Contract {
        self.songs_by_artist.insert(&env::predecessor_account_id(), 
        &SongList{songs: song_list});
        log!("songlist: {:?}", self.songs_by_artist.get(&env::predecessor_account_id()).unwrap().songs);
-      // log!("get_song: {:?}", get_song_list[0].song_name);
     }
     //Public method - returns entire song catalog
     //pub fn get_song_catalog(&self, account_id: AccountId) -> SongList {
     pub fn get_song_catalog(&self) -> Vec<(AccountId, SongList)> {
-      log!("get_song_catalog called");
-      //log!("get songs by id {:?}", self.songs_by_artist.get(&account_id).unwrap_or_default());
-        //  SongList{songs: vec![SongInfo{song_name: "testnamefromrust".to_string(), price: 11.0}]}
-      //self.songs_by_artist.get(&account_id).unwrap_or_default()
-    self.songs_by_artist.to_vec()
+        log!("get_song_catalog called");
+        self.songs_by_artist.to_vec()
     }
 
     #[payable]
@@ -114,19 +101,6 @@ impl Contract {
         song_list.remove(key)
     }
      */
-    
-    
-/* 
-    pub fn set_status(&mut self, status: String) {
-        self.songs_by_artist.insert(&env::predecessor_account_id(), &status);
-        // Note, don't need to check size, since `UnorderedMap` doesn't store all data in memory.
-    }
-
-    pub fn delete_status(&mut self) {
-        self.songs_by_artist.remove(&env::predecessor_account_id());
-    }
-
-    */
 }
 
 /*

@@ -1,21 +1,18 @@
 import React, {useState} from 'react';
-import getConfig from './near/config';
 import Notification from './Notification.js';
 
-function AddSong ({add_song_info, get_song_catalog, addSongInfo}) {
+function AddSong ({addSongInfo}) {
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [song, setSong] = useState();
     const [songInfo, setSongInfo] = useState(undefined);
     const [showNotification, setShowNotification] = useState(false);
-   // const[songCatalog, setSongCatalog] = useState("setSongCatalog");
-    const[songCatalog, setSongCatalog] = useState(undefined);
+    //const[songCatalog, setSongCatalog] = useState(undefined);
 
     const submit = async event => {
       event.preventDefault()
             // get elements from the form using their id attribute
             const { fieldset, song } = event.target.elements
             // hold onto new user-entered value from React's SynthenticEvent for use after `await` call
-            //const newGreeting = greeting.value
             // disable the form while the value gets updated on-chain
             fieldset.disabled = true
             await addSongInfo(songInfo)
@@ -45,17 +42,8 @@ function AddSong ({add_song_info, get_song_catalog, addSongInfo}) {
 
     return (
         <>
-        {songCatalog}
+{/*        {songCatalog} */}
         <form onSubmit={(e) => submit(e)}>
-{/*
-  song_catalog.songs[0].song_name
-            what is fieldset? allows disabling of form by calling fieldset.disabled
-
-            htmlFor? 
-                              
-                  onChange= e => setButtonDisabled(e.target.value === "gre")
-              
-        */}
             <fieldset id="fieldset">
             Musicians, input your song for sale
             <p></p>

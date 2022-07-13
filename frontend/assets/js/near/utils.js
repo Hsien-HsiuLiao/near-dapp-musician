@@ -19,9 +19,9 @@ export async function initContract() {
   // Initializing our contract APIs by contract name and configuration
   window.contract = await new Contract(window.walletConnection.account(), nearConfig.contractName, {
     // View methods are read only. They don't modify the state, but usually return some value.
-    viewMethods: ['get_greeting', 'get_song_catalog'],
+    viewMethods: ['get_song_catalog'],
     // Change methods can modify the state. But you don't receive the returned value when called.
-    changeMethods: ['set_greeting', 'add_song_info', 'buy_song'],
+    changeMethods: ['add_song_info', 'buy_song'],
   })
 }
 
@@ -39,33 +39,17 @@ export function login() {
   window.walletConnection.requestSignIn(nearConfig.contractName)
 }
 
-export async function set_greeting(message){
-  let response = await window.contract.set_greeting({
-    args:{message: message}
-  })
-  return response
-}
-
 export async function add_song_info(songname, price) {
-  console.log("songname ",songname );
   let response = await window.contract.add_song_info({
     args:{song_name: songname, price}
   })
   return response
 }
 
-export async function get_greeting(){
-  let greeting = await window.contract.get_greeting()
-  return greeting
-}
-
 export async function get_song_catalog(account_id){
-  console.log("typeof account_id ", account_id);
-  console.log(window.contract);
   let song_catalog = await window.contract.get_song_catalog({
     account_id: account_id
   });
-  //console.logs("args ", {args});
   return song_catalog
 }
 
@@ -78,11 +62,10 @@ export async function accountBalance() {
 }
 
 export async function buy_song(account_id, songname, price) {
-  console.log("id ",account_id, "price: ", price );
   let response = await window.contract.buy_song({
     artist: account_id, song_name: songname, price
-  }, "300000000000000", // attached GAS (optional)
-  "700000000000000000000000" // attached deposit in yoctoNEAR (optional)
+  }, "300000000000000", // attached GAS
+  "700000000000000000000000" // attached deposit in yoctoNEAR
   )
   return response
 }
