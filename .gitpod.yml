@@ -1,8 +1,7 @@
 tasks:
-  - init: yarn
+  - init: yarn install
     command: |
       rustup target add wasm32-unknown-unknown
-      yarn dev
 ports:
   - port: 1234
     onOpen: open-browser
