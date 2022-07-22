@@ -1,6 +1,6 @@
 tasks:
   - init: yarn
-    command: 
+    command: |
       rustup target add wasm32-unknown-unknown
       yarn dev
 ports:
