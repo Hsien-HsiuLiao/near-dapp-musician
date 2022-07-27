@@ -17,6 +17,16 @@ Troubleshooting: (not initialized, etc)
 
 - remove neardev folder and run `yarn dev` again (see https://www.near-sdk.io/upgrading/prototyping)
 
+To do:
+
+- finish buying song code
+- move song catalog down
+- create user catalog to show songs after purchase under username
+- finish scripts
+- record loom video https://www.loom.com/signup
+- write tests
+- assert statements (assert(env::caller == window.currentid))
+
 
 Quick Start
 ===========
