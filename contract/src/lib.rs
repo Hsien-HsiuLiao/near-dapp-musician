@@ -88,7 +88,7 @@ impl Contract {
     #[payable]
     pub fn buy_song (artist: AccountId, song_name: String, price: f32) {
         Promise::new(artist).transfer(env::attached_deposit());
-        log!("song purchased {} {}", song_name, price);
+        log!("song purchased {} {}", song_name, env::attached_deposit());
     }
 
     /* 

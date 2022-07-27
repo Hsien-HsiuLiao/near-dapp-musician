@@ -4,7 +4,6 @@ import React, {useState, useCallback, useEffect} from 'react'
 import './assets/css/global.css'
 
 import {login, logout, add_song_info, get_song_catalog, accountBalance} from './assets/js/near/utils';
-//import getConfig from './assets/js/near/config'
 import Header from './assets/js/Header.js';
 import SongList from './assets/js/SongList.js';
 import AddSong from './assets/js/AddSong';
@@ -88,16 +87,10 @@ export default function App() {
       
       <main>
         <Header />
-        <SongList song_catalog={songCatalog}/>
         <AddSong add_song_info={add_song_info} get_song_catalog={get_song_catalog} addSongInfo={addSongInfo}/>
         <hr />
-        <p>
-          <a target="_blank" rel="noreferrer" href="https://docs.near.org">NEAR docs</a>
-        </p>
+        <SongList song_catalog={songCatalog}/>
       </main>
-      {/* 
-      {showNotification && <Notification />}
-      */}
     </>
   )
 }

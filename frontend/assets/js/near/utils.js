@@ -1,5 +1,6 @@
 import { connect, Contract, keyStores, WalletConnection } from 'near-api-js';
 import { formatNearAmount } from 'near-api-js/lib/utils/format';
+import { parseNearAmount } from 'near-api-js/lib/utils/format';
 import getConfig from './config'
 
 const nearConfig = getConfig(process.env.NODE_ENV || 'development')
@@ -62,10 +63,12 @@ export async function accountBalance() {
 }
 
 export async function buy_song(account_id, songname, price) {
+  //let yoctoNEAR = 100000000000000000000000;
+  //price = parseNearAmount(price);
   let response = await window.contract.buy_song({
     artist: account_id, song_name: songname, price
   }, "300000000000000", // attached GAS
-  "700000000000000000000000" // attached deposit in yoctoNEAR
+  parseNearAmount(price.toString()) // attached deposit in yoctoNEAR
   )
   return response
 }
