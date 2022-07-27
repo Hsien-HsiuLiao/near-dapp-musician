@@ -1,3 +1,4 @@
+pub mod songs_purchased;
 /*
  * Learn more about writing NEAR smart contracts with Rust:
  * https://near-docs.io/develop/Contract
