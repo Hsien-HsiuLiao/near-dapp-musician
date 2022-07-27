@@ -19,8 +19,6 @@ Troubleshooting: (not initialized, etc)
 
 To do:
 
-- finish buying song code
-- move song catalog down
 - create user catalog to show songs after purchase under username
 - finish scripts
 - record loom video https://www.loom.com/signup
