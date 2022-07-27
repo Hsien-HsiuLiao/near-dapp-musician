@@ -21,11 +21,11 @@ async fn main() -> anyhow::Result<()> {
         .into_result()?;
 
     // begin tests
-    test_default_message(&alice, &contract, &worker).await?;
-    test_changes_message(&alice, &contract, &worker).await?;
+  //  test_default_message(&alice, &contract, &worker).await?;
+  //  test_changes_message(&alice, &contract, &worker).await?;
     Ok(())
 }
-
+/* 
 async fn test_default_message(
     user: &Account,
     contract: &Contract,
@@ -63,4 +63,6 @@ async fn test_changes_message(
     assert_eq!(message, "Howdy".to_string());
     println!("      Passed ✅ changes message");
     Ok(())
+    
 }
+*/
