@@ -1,4 +1,6 @@
 pub mod songs_purchased;
+
+use crate::songs_purchased::add_song_to_user_dashboard;
 /*
  * Learn more about writing NEAR smart contracts with Rust:
  * https://near-docs.io/develop/Contract
@@ -41,7 +43,7 @@ pub struct SongInfo {
 }
 
 // 1 Ⓝ in yoctoNEAR
-const YOCTO_AMOUNT: u128 = 1_000_000_000_000_000_000_000_000;
+// const YOCTO_AMOUNT: u128 = 1_000_000_000_000_000_000_000_000;
 
 // Define the default, which automatically initializes the contract
 
@@ -89,6 +91,7 @@ impl Contract {
     pub fn buy_song (artist: AccountId, song_name: String, price: f32) {
         Promise::new(artist).transfer(env::attached_deposit());
         log!("song purchased {} {}", song_name, env::attached_deposit());
+        add_song_to_user_dashboard(env::predecessor_account_id(), song_name);
     }
 
     /* 
