@@ -1,6 +1,7 @@
 pub mod songs_purchased;
 
-use crate::songs_purchased::add_song_to_user_dashboard;
+//use crate::songs_purchased::add_song_to_user_dashboard;
+//use crate::songs_purchased;
 /*
  * Learn more about writing NEAR smart contracts with Rust:
  * https://near-docs.io/develop/Contract
@@ -19,6 +20,7 @@ use near_sdk::{
 #[derive(BorshDeserialize, BorshSerialize, Debug)]
 //#[serde(crate = "near_sdk::serde")]
 
+//type ArtistId = AccountId;
 pub struct Contract {
     songs_by_artist: UnorderedMap<AccountId, SongList>,
 }
@@ -104,6 +106,8 @@ impl Contract {
 
     #[payable]
     pub fn buy_song(artist: AccountId, song_name: String, price: f32) {
+        // if user songlist == null, create new default empty list
+        // other wise , get user list by env::id
         Promise::new(artist).transfer(env::attached_deposit());
         log!("song purchased {} {}", song_name, env::attached_deposit());
         add_song_to_user_dashboard(&env::predecessor_account_id(), song_name);
